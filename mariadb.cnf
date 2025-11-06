@@ -1,0 +1,5 @@
+[client]
+database = Asia_Energy
+user = root
+password = root
+default-character-set = utf8mb4

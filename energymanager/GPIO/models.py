@@ -4,4 +4,8 @@ from django.db import models
 
 class TemperatureValue(models.Model):
    measurement = models.CharField(max_length=255)
-   date = models.DateField("timestamp")
+   date = models.DateTimeField("timestamp")
+
+class RadarSensoreValue(models.Model):
+   measurement = models.CharField(max_length=255)
+   date = models.DateTimeField("timestamp")
