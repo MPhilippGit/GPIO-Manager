@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MARIADB_CONF = BASE_DIR / 'mariadb.cnf'
 
 
 # Quick-start development settings - unsuitable for production
@@ -80,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-           'read_default_file': './mariadb.cnf',
+           'read_default_file': str(MARIADB_CONF)
         }
     }
 }
