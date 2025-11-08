@@ -3,7 +3,6 @@ from GPIO.models import TemperatureValue as measurement
 from django.utils import timezone
 import random
 
-
 class Command(BaseCommand):
     help = "removes database entries"
 
