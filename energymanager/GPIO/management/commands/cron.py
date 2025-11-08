@@ -5,16 +5,20 @@ import random
 
 
 class Command(BaseCommand):
-    help = "Adds a measurement to the database"
+    help = "Adds a temperature measurement to the database"
 
     def handle(self, *args, **options):
+        """
+        writes a temperature into the database
+        """
         simulated_measurement = round(random.uniform(18,26))
         temperature_unit = "Celsius"
         timestamp = timezone.now()
-        # print("Blub")
-        # random_measurement = random.randint(18, 29)
-
-        new_measurement = measurement(measurement=simulated_measurement, unit=temperature_unit, date=timestamp)
-        print(new_measurement.measurement)
-        new_measurement.save()
+        try:
+            new_measurement = measurement(measurement=simulated_measurement, unit=temperature_unit, date=timestamp)
+            new_measurement.save()
+            print(f"{new_measurement.measurement} \t {timestamp}")
+        except Exception as error:
+            # Log errors 
+            print(f"{error} \t {timestamp}")
         pass
