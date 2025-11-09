@@ -8,9 +8,6 @@ class Command(BaseCommand):
     help = "Adds a temperature measurement to the database"
 
     def handle(self, *args, **options):
-        """
-        writes a temperature into the database
-        """
         simulated_measurement = round(random.uniform(18,26))
         temperature_unit = "Celsius"
         timestamp = timezone.now()
@@ -21,4 +18,3 @@ class Command(BaseCommand):
         except Exception as error:
             # Log errors 
             print(f"{error} \t {timestamp}")
-        pass

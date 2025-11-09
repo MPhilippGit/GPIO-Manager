@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from GPIO.models import TemperatureValue as measurement
+from GPIO.models import TemperatureValues as measurement
 from django.utils import timezone
 import random
 

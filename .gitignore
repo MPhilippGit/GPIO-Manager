@@ -14,3 +14,4 @@ migrations/
 
 # disallow logs
 logs/
+node_modules
