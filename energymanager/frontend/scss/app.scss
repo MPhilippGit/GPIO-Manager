@@ -1,5 +1,9 @@
+@use "theme/theme" as *;
 @import "bootstrap/scss/bootstrap";
 
-body {
-   background-color: pink;
+main {
+   .GPIO_dashboard {
+      color: $text-primary;
+
+   }
 }
