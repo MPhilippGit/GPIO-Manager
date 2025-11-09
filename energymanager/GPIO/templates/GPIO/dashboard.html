@@ -4,31 +4,32 @@
    {% load static %}
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="{% static 'src/css/styles.css' %}">
-   <script defer src="{% static 'src/js/index.js' %}"></script>
+   <link rel="stylesheet" href="{% static 'dist/assets/index.css' %}">
+   <script defer type="module" src="{% static 'dist/assets/index.js' %}"></script>
    <title>Dashboard</title>
 </head>
 <body>
-   <nav>
-      <ul>
-         <li>Temperature</li>
-         <li>Humidity</li>
-         <li>VOC</li>
-      </ul>
+   <nav class="navbar GPIO_navigation">
+      <div class="container-fluid">
+         <ul>
+            <li>
+               <a href="temperature">Temperature</a>
+            </li>
+            <li>
+               <a href="humidity">Humidity</a>
+            </li>
+            <li>
+               <a href="voc">VOC</a>
+            </li>
+         </ul>
+      </div>
    </nav> 
    <main>
       <h1>Value of today</h1>
-      <button id="fetchTemperatures">Werte</button>
-      {% load tz %}
-
-{% timezone "Europe/Paris" %}
-    Paris time: {{ value }}
-{% endtimezone %}
-
-{% timezone None %}
-    Server time: {{ value }}
-{% endtimezone %}
+      <button id="fetchTemperatures" class="btn-primary">Werte</button>
+      <div>
+         <canvas id="myChart"></canvas>
+      </div>
    </main>
-   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

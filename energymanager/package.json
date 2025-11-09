@@ -1,16 +1,23 @@
 {
-  "name": "static",
+  "name": "energymanager",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "vite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
+  "devDependencies": {
+    "sass": "^1.93.3",
+    "vite": "^7.2.2"
+  },
   "dependencies": {
-    "chartjs": "^0.3.24"
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1"
   }
 }
