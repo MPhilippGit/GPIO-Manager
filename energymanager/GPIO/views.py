@@ -8,8 +8,9 @@ def index(request):
    return HttpResponse(template.render({}, request))
 
 def fetch_temperatures(request):
-   data = list(Temperatures.objects.values("measurement", "date"))
-   return JsonResponse(data, safe=False)
+   data = list(Temperatures.objects.values("measurement", "timestamp"))
+   filter_data = data[-10:]
+   return JsonResponse(filter_data, safe=False)
 
 def fetch_humidities(request):
    data = ["humidities", "placeholder", "value"]
