@@ -11,10 +11,10 @@ export default defineConfig({
       outDir: path.resolve(__dirname, './static'),
       emptyOutDir: true,
       rollupOptions: {
-         input: path.resolve(__dirname, "frontend/index.js"),
+         input: path.resolve(__dirname, "frontend/main.jsx"),
          output: {
-            entryFileNames: "assets/[name]-bundle.js",
-            assetFileNames: "assets/[name].[ext]",
+            entryFileNames: "frontend/[name]-bundle.js",
+            assetFileNames: "frontend/[name].[ext]",
          },
       },
    },
