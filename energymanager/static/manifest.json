@@ -1,0 +1,11 @@
+{
+  "frontend/index.js": {
+    "file": "assets/index.js",
+    "name": "index",
+    "src": "frontend/index.js",
+    "isEntry": true,
+    "css": [
+      "assets/index.css"
+    ]
+  }
+}
