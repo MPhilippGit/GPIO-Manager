@@ -1,11 +1,12 @@
 {% load django_vite %}
 <html>
   <head>
-    <title>Getting Started with Django and Vite</title>
+    <title>Warum</title>
+    {% vite_react_refresh %}
     {% vite_hmr_client %}
   </head>
   <body>
-    <div id="root" />
+    <div id="root"></div>
     {% vite_asset 'frontend/main.jsx' %}
   </body>
 </html>
