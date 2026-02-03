@@ -5,7 +5,7 @@ import path from "path";
 export default defineConfig({
    base: "/static/",
    plugins: [react()],
-   root: ".", // kein eigenes Root, da du index.html nicht nutzt
+   root: ".",
    build: {
       manifest: "manifest.json",
       outDir: path.resolve(__dirname, './static'),
