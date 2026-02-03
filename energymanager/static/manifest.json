@@ -1,11 +1,11 @@
 {
-  "frontend/index.js": {
-    "file": "assets/index.js",
-    "name": "index",
-    "src": "frontend/index.js",
+  "frontend/main.jsx": {
+    "file": "frontend/main-bundle.js",
+    "name": "main",
+    "src": "frontend/main.jsx",
     "isEntry": true,
     "css": [
-      "assets/index.css"
+      "frontend/main.css"
     ]
   }
 }

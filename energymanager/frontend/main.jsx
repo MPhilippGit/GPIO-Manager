@@ -1,13 +1,16 @@
 import 'vite/modulepreload-polyfill'
 import { StrictMode } from 'react';
-import { Button } from './Button.jsx';
+import { Sidebar } from './components/Sidebar.jsx';
+import { Board } from './components/Board.jsx';
 import { createRoot } from 'react-dom/client';
-import "./main.css";
+import "./scss/app.scss";
 
 const root = createRoot(document.getElementById('root'));
 root.render(
     <StrictMode>
-        <h1>Check 12</h1>
-        <Button />
+        <div className='dash'>
+            <Sidebar />
+
+        </div>
     </StrictMode>
 );

@@ -51,8 +51,7 @@ $transition-fast: 0.2s ease-in-out;
 // 🧱 Base Styles
 // ==============================
 
-body {
-  background: $gradient-bg;
+.background {
   color: $text-primary;
   font-family: $font-family-base;
   margin: 0;

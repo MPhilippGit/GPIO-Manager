@@ -1,8 +1,7 @@
 @use "theme/theme" as *;
 @import "bootstrap/scss/bootstrap";
 
-main {
-   .GPIO_dashboard {
-      color: $text-primary;
-   }
+.dash {
+   display: grid;
+   grid-template-columns: 3fr 8fr;
 }
