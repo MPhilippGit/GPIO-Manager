@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+
 import react from '@vitejs/plugin-react';
 import path from "path";
 
@@ -17,17 +18,5 @@ export default defineConfig({
             assetFileNames: "frontend/[name].[ext]",
          },
       },
-   },
-   css: {
-      preprocessorOptions: {
-         scss: {
-            silenceDeprecations: [
-               'import',
-               'mixed-decls',
-               'color-functions',
-               'global-builtin',
-            ],
-         },
-      },
-   },
+   }
 });

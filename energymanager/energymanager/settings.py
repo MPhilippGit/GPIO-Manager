@@ -130,7 +130,6 @@ STATIC_ROOT = BASE_DIR / STATIC_URL
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "assets",
 ]
 
 DJANGO_VITE = {
