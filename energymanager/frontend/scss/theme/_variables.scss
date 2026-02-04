@@ -1,0 +1,62 @@
+// ==============================
+// 🌑 Dark Gradient Theme: "Carbon Pulse"
+// ==============================
+
+// === Base Colors ===
+$bg-dark: #0d1117;
+$bg-panel: #161b22;
+$text-primary: #e6edf3;
+$text-muted: #8b949e;
+
+// === Accent Colors ===
+$accent-green: #00e887;
+$accent-orange: #ff8a00;
+$accent-blue: #0a84ff;
+$accent-purple: #7b61ff;
+$accent-red: #ff3b30;
+
+// === Gradients ===
+$gradient-schmerz: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
+$gradient-primary: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
+$gradient-energy: linear-gradient(135deg, $accent-green 0%, $accent-orange 100%);
+$gradient-bg: radial-gradient(circle at 20% 20%, #1a3459 0%, $bg-dark 100%);
+
+// === Font & Layout ===
+$font-family-base: "Inter", "Roboto", sans-serif;
+$border-radius-base: 1rem;
+$transition-fast: 0.2s ease-in-out;
+
+// ==============================
+// 🌈 Utility Mixins
+// ==============================
+
+@mixin gradient-text($gradient) {
+    background: $gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@mixin card-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+@mixin hover-lift {
+    transition: transform $transition-fast, opacity $transition-fast;
+
+    &:hover {
+        transform: translateY(-2px);
+        opacity: 0.9;
+    }
+}
+
+$chart-colors: (
+    green: $accent-green,
+    orange: $accent-orange,
+    blue: $accent-blue,
+    purple: $accent-purple,
+    red: $accent-red
+);
+
+@function chart-color($key) {
+    @return map-get($chart-colors, $key);
+}

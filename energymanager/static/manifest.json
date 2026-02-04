@@ -1,0 +1,11 @@
+{
+  "frontend/main.jsx": {
+    "file": "frontend/main-bundle.js",
+    "name": "main",
+    "src": "frontend/main.jsx",
+    "isEntry": true,
+    "css": [
+      "frontend/main.css"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+.button-primary {
+    background: $gradient-primary;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: $border-radius-base;
+    cursor: pointer;
+    @include hover-lift;
+}
+
+.button-accent {
+    background: $gradient-energy;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: $border-radius-base;
+    cursor: pointer;
+    @include hover-lift;
+}

@@ -1,8 +1,10 @@
-@use "theme/theme" as *;
-@import "bootstrap/scss/bootstrap";
+@use "theme/theme";
 
-main {
-   .GPIO_dashboard {
-      color: $text-primary;
-   }
+body {
+    margin: 0;
+}
+
+.dash-container {
+    padding-block: 3rem;
+    padding-inline: 1.5rem;
 }
