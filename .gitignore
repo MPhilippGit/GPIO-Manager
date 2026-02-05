@@ -16,3 +16,4 @@ migrations/
 logs/
 node_modules
 static/
+app.log
