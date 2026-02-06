@@ -27,9 +27,9 @@ SECRET_KEY = 'django-insecure-6eke%jf8agotp6!7ac%c!v$ub=d9p8q5nlj^4i&22qp*9q^hg5
 DEBUG = True
 
 ALLOWED_HOSTS = [
-   '172.16.111.39',
-   '127.0.0.1',
-   'localhost'
+    '172.16.111.39',
+    '127.0.0.1',
+    'localhost'
 ]
 
 
@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-           'read_default_file': str(MARIADB_CONF)
+            'read_default_file': str(MARIADB_CONF)
         }
     }
 }
