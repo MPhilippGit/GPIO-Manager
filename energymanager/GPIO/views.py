@@ -27,6 +27,13 @@ def fetch_vcos(request):
 
 def fetch_log(request):
    logfile = BASE_DIR / "app.log"
+   logcontent = []
    with logfile.open("r") as f:
-      filecontent = f.readlines()
-   return HttpResponse(content=filecontent)
+      for line in f.readlines()[::-3]:
+         linefields = line.split("|")
+         logcontent.append({
+            "level": linefields[0].strip(),
+            "timestamp": linefields[1].strip(),
+            "content": linefields[2].strip()
+         })
+   return JsonResponse(logcontent, safe=False)
