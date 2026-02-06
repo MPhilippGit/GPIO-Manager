@@ -17,3 +17,4 @@ logs/
 node_modules
 static/
 app.log
+cron.log
