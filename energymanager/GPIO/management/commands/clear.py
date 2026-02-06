@@ -9,4 +9,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         entries = measurement.objects.all() 
         for entry in entries:
-         entry.delete()
+            entry.delete()

@@ -16,11 +16,10 @@ class Command(BaseCommand):
         temperature_unit = "Celsius"
         date_time = timezone.now()
         logger = self.log()
-        logger.info(f"new temperature: {simulated_measurement}")
         try:
             new_measurement = measurement(measurement=simulated_measurement, unit=temperature_unit, timestamp=date_time)
             new_measurement.save()
-            print(f"{new_measurement.measurement} \t {date_time}")
+            logger.info(f"saved new temperature to db: {simulated_measurement}")
         except Exception as error:
             # Log errors 
-            print(f"{error} \t {date_time}")
+            logger.error(f"error while trying to write to db: {error}")
