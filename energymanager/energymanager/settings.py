@@ -154,12 +154,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/dist/'
 
-STATIC_ROOT = BASE_DIR / STATIC_URL
+STATIC_ROOT = BASE_DIR / 'staticroot'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    BASE_DIR / "dist",
 ]
 
 DJANGO_VITE = {

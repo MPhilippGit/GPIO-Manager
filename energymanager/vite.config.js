@@ -4,18 +4,20 @@ import react from '@vitejs/plugin-react';
 import path from "path";
 
 export default defineConfig({
-   base: "/static/",
+   base: "/dist/",
    plugins: [react()],
    root: ".",
    build: {
       manifest: "manifest.json",
-      outDir: path.resolve(__dirname, './static'),
+      outDir: path.resolve(__dirname, './dist'),
       emptyOutDir: true,
       rollupOptions: {
-         input: path.resolve(__dirname, "frontend/main.jsx"),
+         input: {
+            'main': path.resolve(__dirname, "./frontend/main.jsx"),
+         },
          output: {
-            entryFileNames: "frontend/[name]-bundle.js",
-            assetFileNames: "frontend/[name].[ext]",
+            entryFileNames: "[name]-bundles.js",
+            assetFileNames: "[name].[ext]",
          },
       },
    }
