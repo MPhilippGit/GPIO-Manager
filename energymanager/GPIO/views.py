@@ -1,3 +1,4 @@
+from energymanager.settings import BASE_DIR
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, JsonResponse, Http404
@@ -19,3 +20,20 @@ def fetch_humidities(request):
 def fetch_vcos(request):
    data = ["vco", "placeholder", "values"]
    return JsonResponse(data, safe=False)
+
+def fetch_vcos(request):
+   data = ["vco", "placeholder", "values"]
+   return JsonResponse(data, safe=False)
+
+def fetch_log(request):
+   logfile = BASE_DIR / "app.log"
+   logcontent = []
+   with logfile.open("r") as f:
+      for line in f.readlines()[::-3]:
+         linefields = line.split("|")
+         logcontent.append({
+            "level": linefields[0].strip(),
+            "timestamp": linefields[1].strip(),
+            "content": linefields[2].strip()
+         })
+   return JsonResponse(logcontent, safe=False)

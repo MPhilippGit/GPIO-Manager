@@ -1,5 +1,8 @@
 .dash {
     display: grid;
-    grid-template-columns: 3fr 9fr;
-    max-height: 100vh;
+    grid-template-columns: 0 1fr;
+
+    @include tablet-view {
+        grid-template-columns: 3fr 9fr;
+    }
 }

@@ -27,9 +27,9 @@ SECRET_KEY = 'django-insecure-6eke%jf8agotp6!7ac%c!v$ub=d9p8q5nlj^4i&22qp*9q^hg5
 DEBUG = True
 
 ALLOWED_HOSTS = [
-   '172.16.111.39',
-   '127.0.0.1',
-   'localhost'
+    '172.16.111.39',
+    '127.0.0.1',
+    'localhost'
 ]
 
 
@@ -84,9 +84,39 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-           'read_default_file': str(MARIADB_CONF)
+            'read_default_file': str(MARIADB_CONF)
         }
     }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} | {asctime} | {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": BASE_DIR / "app.log",
+            "formatter": "verbose"
+        },
+    },
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "INFO",
+    },
 }
 
 
@@ -124,13 +154,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/dist/'
 
-STATIC_ROOT = BASE_DIR / STATIC_URL
+STATIC_ROOT = BASE_DIR / 'staticroot'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "assets",
+    BASE_DIR / "dist",
 ]
 
 DJANGO_VITE = {

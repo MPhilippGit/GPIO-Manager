@@ -6,4 +6,10 @@
     gap: 16px;
     flex-direction: column;
     min-height: 100vh;
+
+    &_logo {
+        width: 60%;
+        margin-inline: auto;
+        height: auto;
+    }
 }

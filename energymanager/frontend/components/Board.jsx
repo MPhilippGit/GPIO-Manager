@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import "../scss/components/board.scss";
 
 function Board() {
     const chartRef = useRef(null);
