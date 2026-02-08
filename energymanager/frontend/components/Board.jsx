@@ -38,11 +38,6 @@ function Board() {
                 },
             ]
         }
-    
-    const graphOptions = {
-        maintainAspectRatio: false,
-        responsive: true,
-    }
 
     return (
         <main className="dash-main dash-container">
