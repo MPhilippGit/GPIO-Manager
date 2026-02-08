@@ -1,6 +1,10 @@
-function Button() {
+import "../scss/components/buttons.scss";
+
+function Button({ text }) {
     return (
-        <button className="button-primary">Show logs</button>
+        <button className="button-primary">
+            {text}
+        </button>
     )
 }
 

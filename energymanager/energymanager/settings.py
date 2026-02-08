@@ -164,9 +164,10 @@ STATICFILES_DIRS = [
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": True
+        "dev_mode": False
     }
 }
+DJANGO_VITE_STATIC_URL_PREFIX = 'dist'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

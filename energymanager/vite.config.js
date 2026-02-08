@@ -13,11 +13,11 @@ export default defineConfig({
       emptyOutDir: true,
       rollupOptions: {
          input: {
-            'main': path.resolve(__dirname, "./frontend/main.jsx"),
+            main: path.resolve(__dirname, "./frontend/main.jsx"),
          },
          output: {
-            entryFileNames: "[name]-bundles.js",
-            assetFileNames: "[name].[ext]",
+            entryFileNames: "[name]-[hash]-bundles.js",
+            assetFileNames: "[name]-[hash].[ext]",
          },
       },
    }

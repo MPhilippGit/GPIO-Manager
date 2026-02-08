@@ -1,3 +1,5 @@
+@use "../theme/includes";
+
 .dash-sidebar {
     background-color: white;
     border-radius: 0 1.2rem 1.2rem 0;
@@ -5,7 +7,6 @@
     display: flex;
     gap: 16px;
     flex-direction: column;
-    min-height: 100vh;
 
     &_logo {
         width: 60%;
