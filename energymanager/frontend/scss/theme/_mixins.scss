@@ -1,11 +1,11 @@
 @mixin tablet-view {
-    @media only screen and (max-width: 40rem) {
+    @media only screen and (min-width: 40rem) {
         @content;
     }
 }
 
 @mixin desktop-view {
-    @media only screen and (max-width: 80rem) {
+    @media only screen and (min-width: 80rem) {
         @content;
     }
 }

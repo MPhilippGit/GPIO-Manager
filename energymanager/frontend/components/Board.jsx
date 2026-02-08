@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
+import "../scss/components/board.scss";
 
 function Board() {
     const chartRef = useRef(null);
@@ -25,7 +26,7 @@ function Board() {
                     {
                         label: "Person detected",
                         data: [1, 0, 1, 1, 0, 1],
-                        fill: false,
+                        fill: true,
                         borderColor: 'rgba(54, 162, 235, 1)',
                         stepped: true,
                     }
@@ -49,7 +50,7 @@ function Board() {
 
     return (
         <main className="dash-main dash-container">
-            <div style={{ position: 'relative', height: '40vh', width: '80vw' }}>
+            <div className='dash-main_graph'>
                 <canvas ref={chartRef} />
             </div>
         </main>
