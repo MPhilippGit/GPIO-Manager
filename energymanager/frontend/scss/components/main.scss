@@ -2,7 +2,8 @@
 
 .dash {
     display: grid;
-    grid-template-columns: 0 1fr;
+    grid-template-columns: 1fr;
+    height: 100vh;
 
     @include t.tablet-view {
         grid-template-columns: 3fr 9fr;

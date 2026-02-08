@@ -1,0 +1,31 @@
+@use "./mixins";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+h1, h2 {
+    font-size: 2rem;
+    line-height: 2.25rem;
+
+    @include mixins.tablet-view{
+        font-size: 3rem;
+        line-height: 3.25rem;
+    }
+}
+
+h3, h4 {
+    font-size: 1.5rem;
+    line-height: 2.75rem;
+
+    @include mixins.tablet-view{
+        font-size: 2.5rem;
+        line-height: 2.75rem;
+    }
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}

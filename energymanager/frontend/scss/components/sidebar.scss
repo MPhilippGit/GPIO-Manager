@@ -1,4 +1,4 @@
-@use "../theme/includes";
+@use "../theme/includes" as t;
 
 .dash-sidebar {
     background-color: white;
@@ -7,6 +7,22 @@
     display: flex;
     gap: 16px;
     flex-direction: column;
+    
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: translate 2s ease-in-out;
+
+    &.active {
+        width: 30%;
+        transform: translate(0);
+    }
+
+    @include t.tablet-view {
+        position: relative;
+        transform: translate(0);
+    }
 
     &_logo {
         width: 60%;

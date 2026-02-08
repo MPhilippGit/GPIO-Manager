@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import "../scss/components/board.scss";
 
@@ -50,6 +50,7 @@ function Board() {
 
     return (
         <main className="dash-main dash-container">
+            <h2>Energy Monitor</h2>
             <div className='dash-main_graph'>
                 <canvas ref={chartRef} />
             </div>
