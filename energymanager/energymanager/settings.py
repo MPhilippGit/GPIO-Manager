@@ -164,7 +164,7 @@ STATICFILES_DIRS = [
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": False
+        "dev_mode": True
     }
 }
 DJANGO_VITE_STATIC_URL_PREFIX = 'dist'
