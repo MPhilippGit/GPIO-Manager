@@ -23,13 +23,6 @@ function Board() {
                         borderColor: 'rgba(255, 99, 132, 1)',
                         tension: 0.1
                     },
-                    {
-                        label: "Person detected",
-                        data: [1, 0, 1, 1, 0, 1],
-                        fill: true,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        stepped: true,
-                    }
                 ]
             },
             options: {

@@ -7,11 +7,10 @@
     background: t.$gradient-bg;
 
     @include t.tablet-view {
-        grid-template-columns: 3fr 9fr;
+        grid-template-columns: 200px 9fr;
     }
 
     &-main {
-        overflow-x: scroll;
         color: white;
         
         &_graph {

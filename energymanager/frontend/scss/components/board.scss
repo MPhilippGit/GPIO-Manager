@@ -1,5 +1,11 @@
+@use "../theme/includes" as t;
+
 .dash-main {
-    canvas {
-        background-color: white;
+    &_graph {
+        canvas {
+            border-radius: t.$border-radius-base;
+            padding: .5rem;
+            background-color: white;
+        }
     }
 }
