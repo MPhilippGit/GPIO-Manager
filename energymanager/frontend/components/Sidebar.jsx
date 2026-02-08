@@ -1,5 +1,3 @@
-import "../scss/components/sidebar.scss";
-
 function Sidebar() {
     return (
         <aside className="dash-sidebar dash-container">
