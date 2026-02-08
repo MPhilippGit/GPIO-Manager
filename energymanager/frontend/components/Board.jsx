@@ -1,5 +1,6 @@
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
+import { tempOptions } from '../utils/chart-options.js';
 import "../scss/components/board.scss";
 
 function Board() {
@@ -15,12 +16,17 @@ function Board() {
                 },
             ]
         }
+    
+    const graphOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+    }
 
     return (
         <main className="dash-main dash-container">
             <h2>Energy Monitor</h2>
             <div className='dash-main_graph'>
-                <Line data={lineData} />
+                <Line data={lineData} options={tempOptions} />
             </div>
         </main>
     );
