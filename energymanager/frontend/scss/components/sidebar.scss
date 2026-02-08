@@ -25,8 +25,9 @@
     }
 
     &_logo {
-        width: 60%;
+        width: min(60%, 80px);
         margin-inline: auto;
+        margin-bottom: 2rem;
         height: auto;
     }
 }

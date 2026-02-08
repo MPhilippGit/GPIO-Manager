@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 1fr;
     height: 100vh;
+    background: t.$gradient-bg;
 
     @include t.tablet-view {
         grid-template-columns: 3fr 9fr;
@@ -11,6 +12,7 @@
 
     &-main {
         overflow-x: scroll;
+        color: white;
         
         &_graph {
             max-width: 100%;

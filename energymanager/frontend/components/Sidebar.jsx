@@ -9,9 +9,9 @@ function Sidebar() {
     return (
         <aside className="dash-sidebar dash-container">
             <img src={logoUrl} className="dash-sidebar_logo"/>
-            <Button text="Temperatures" />
-            <Button text="VOCs"/>
-            <Button text="Humidity" />
+            <Button text="Temperatures" icon="thermometer" />
+            <Button text="VOCs" icon="spray-can" />
+            <Button text="Humidity" icon="bubbles" />
         </aside>
     )
 }
