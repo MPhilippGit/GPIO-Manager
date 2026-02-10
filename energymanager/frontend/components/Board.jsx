@@ -3,6 +3,7 @@ import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import { tempOptions } from '../utils/chart-options.js';
 import "../scss/components/board.scss";
+import { TimeFormatter } from '../utils/Timeformatter.js';
 
 
 function Board() {
@@ -24,7 +25,10 @@ function Board() {
         }
     }
     const tempValues = data.map(value => value.measurement)
-    const labelValues = data.map(value => value.timestamp)
+    const labelValues = data.map(value => {
+        const timestamp = new TimeFormatter(value.timestamp)
+        return timestamp.getGraphFormat();
+    })
 
     const lineData = {
             labels: labelValues,
