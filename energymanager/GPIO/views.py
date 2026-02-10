@@ -15,15 +15,13 @@ def fetch_temperatures(request):
 
 def fetch_humidities(request):
    data = list(Humidities.objects.values("measurement", "timestamp"))
-   return JsonResponse(data, safe=False)
+   filter_data = data[-10:]
+   return JsonResponse(filter_data, safe=False)
 
 def fetch_vocs(request):
    data = list(VOCs.objects.values("measurement", "timestamp"))
-   return JsonResponse(data, safe=False)
-
-def fetch_vcos(request):
-   data = ["vco", "placeholder", "values"]
-   return JsonResponse(data, safe=False)
+   filter_data = data[-10:]
+   return JsonResponse(filter_data, safe=False)
 
 def fetch_log(request):
    logfile = BASE_DIR / "app.log"
