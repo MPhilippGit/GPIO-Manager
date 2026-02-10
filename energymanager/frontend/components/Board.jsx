@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-import { options } from '../utils/chart-options.js';
-import "../scss/components/board.scss";
+import { options, datasets } from '../utils/chart-options.js';
 import { TimeFormatter } from '../utils/Timeformatter.js';
+import "../scss/components/board.scss";
 
 
 function Board({ graph }) {
     const [data, setData] = useState([]);
+
+    const lineData = {
+        datasets: []
+    };
+    const chartDataset = datasets[graph]
 
     useEffect(() => {
         fetchSensorData(graph);
@@ -30,18 +35,10 @@ function Board({ graph }) {
         return timestamp.getGraphFormat();
     })
 
-    const lineData = {
-            labels: labelValues,
-            datasets: [
-                {
-                    label: "Temperature (°C)",
-                    data: tempValues,
-                    fill: false,
-                    borderColor: 'rgb(185, 28, 62)',
-                    tension: 0.1
-                },
-            ]
-        }
+    chartDataset.data = tempValues;
+
+    lineData.datasets.push(chartDataset);
+    lineData.labels = labelValues;
 
     return (
         <main className="dash-main dash-container">
