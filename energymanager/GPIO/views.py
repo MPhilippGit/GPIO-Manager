@@ -2,7 +2,7 @@ from energymanager.settings import BASE_DIR
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse, JsonResponse, Http404
-from .models import Temperatures
+from .models import Temperatures, Humidities, VOCs
 
 def index(request):
    template = loader.get_template("GPIO/dashboard.html")
@@ -14,11 +14,11 @@ def fetch_temperatures(request):
    return JsonResponse(filter_data, safe=False)
 
 def fetch_humidities(request):
-   data = ["humidities", "placeholder", "value"]
+   data = list(Humidities.objects.values("measurement", "timestamp"))
    return JsonResponse(data, safe=False)
 
 def fetch_vcos(request):
-   data = ["vco", "placeholder", "values"]
+   data = list(VOCs.objects.values("measurement", "timestamp"))
    return JsonResponse(data, safe=False)
 
 def fetch_vcos(request):
