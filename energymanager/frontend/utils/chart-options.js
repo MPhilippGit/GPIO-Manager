@@ -1,5 +1,7 @@
+import { PATHS } from "../globals";
+
 const options = {
-    "api/temps": {
+    [PATHS.TEMP]: {
         scales: {
             y: {
                 suggestedMin: 15,
@@ -18,22 +20,60 @@ const options = {
             },
         },
     },
+    [PATHS.HUMID]: {
+        scales: {
+            y: {
+                suggestedMin: 0,
+                suggestedMax: 100,
+            },
+        },
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 22,
+                    },
+                },
+            },
+        },
+    },
+    [PATHS.VOC]: {
+        scales: {
+            y: {
+                suggestedMin: 0,
+                suggestedMax: 1,
+            },
+        },
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        size: 22,
+                    },
+                },
+            },
+        },
+    },
 };
 
 const datasets = {
-    "api/temps": {
+    [PATHS.TEMP]: {
         label: "Temperature (°C)",
         fill: true,
         borderColor: "rgb(185, 28, 62)",
         tension: 0.1,
     },
-    "api/humids": {
+    [PATHS.HUMID]: {
         label: "Restfeuchte (rH)",
         fill: true,
         borderColor: "rgb(33, 114, 130)",
         tension: 0.1,
     },
-    "api/vocs": {
+    [PATHS.VOC]: {
         label: "VOC Konzentration (ppm)",
         fill: true,
         borderColor: "rgb(181, 149, 32)",

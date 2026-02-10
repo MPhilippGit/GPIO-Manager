@@ -1,15 +1,17 @@
 import "../scss/components/buttons.scss";
+import { PATHS } from "../globals";
 import { Icon } from "./Icon";
 
-function Button({ text, icon, setGraph }) {
+function Button({ target, text, icon, setGraph }) {
     const buttonIcon = icon ? <Icon name={icon} size={18} /> : "";
 
-    const changeGraph = () => {
-        setGraph("api/humids")
+    const changeGraph = (e) => {
+        const endpoint = e.target.dataset["target"]
+        setGraph(endpoint)
     }
 
     return (
-        <button onClick={changeGraph} className="button-primary">
+        <button data-target={target} onClick={changeGraph} className="button-primary">
             {buttonIcon}
             {text}
         </button>

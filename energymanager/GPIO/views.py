@@ -17,7 +17,7 @@ def fetch_humidities(request):
    data = list(Humidities.objects.values("measurement", "timestamp"))
    return JsonResponse(data, safe=False)
 
-def fetch_vcos(request):
+def fetch_vocs(request):
    data = list(VOCs.objects.values("measurement", "timestamp"))
    return JsonResponse(data, safe=False)
 
