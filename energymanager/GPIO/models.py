@@ -45,7 +45,7 @@ class VOCs(models.Model):
    def save_voc(measurement):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Humidities(measurement=measurement, unit="ppm", timestamp=timezone.now())
+         new_measurement = VOCs(measurement=measurement, unit="ppm", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new voc measurement: {measurement}")
       except Exception as error:
