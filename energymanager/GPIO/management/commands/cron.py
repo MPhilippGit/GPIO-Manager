@@ -17,5 +17,5 @@ class Command(BaseCommand):
         sim_humidity = round(random.uniform(30,60))
         Humidities.save_humidity(sim_humidity)
 
-        sim_vco = round(random.random())
+        sim_vco = round(random.random(), 2)
         VOCs.save_voc(sim_vco)
