@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-import { tempOptions } from '../utils/chart-options.js';
+import { options } from '../utils/chart-options.js';
 import "../scss/components/board.scss";
 import { TimeFormatter } from '../utils/Timeformatter.js';
 
 
-function Board() {
+function Board({ graph }) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetchSensorData("api/temps");
-    }, [])
+        fetchSensorData(graph);
+    }, [graph])
 
     const fetchSensorData = async (endpoint) => {
         try {
@@ -37,7 +37,7 @@ function Board() {
                     label: "Temperature (°C)",
                     data: tempValues,
                     fill: false,
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderColor: 'rgb(185, 28, 62)',
                     tension: 0.1
                 },
             ]
@@ -47,7 +47,7 @@ function Board() {
         <main className="dash-main dash-container">
             <h2>Energy Monitor</h2>
             <div className='dash-main_graph'>
-                <Line data={lineData} options={tempOptions} />
+                <Line data={lineData} options={options[graph]} />
             </div>
         </main>
     );

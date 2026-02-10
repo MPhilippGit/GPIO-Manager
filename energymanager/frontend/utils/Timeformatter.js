@@ -1,6 +1,5 @@
 class TimeFormatter {
     constructor(timestamp) {
-        console.log(timestamp)
         this.timestamp = timestamp
         const [date, time] = this.timestamp.split("T");
         const [hours, minutes, seconds] = time.split(":");

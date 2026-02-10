@@ -5,13 +5,13 @@ import { viteUrl } from "../utils/vite-url";
 
 const logoUrl = viteUrl(raspi);
 
-function Sidebar() {
+function Sidebar({ setGraph }) {
     return (
         <aside className="dash-sidebar dash-container">
             <img src={logoUrl} className="dash-sidebar_logo"/>
             <Button text="Temperatures" icon="thermometer" />
             <Button text="VOCs" icon="spray-can" />
-            <Button text="Humidity" icon="bubbles" />
+            <Button setGraph={setGraph} text="Humidity" icon="bubbles" />
         </aside>
     )
 }
