@@ -15,17 +15,6 @@ try:
 except (RuntimeError, IOError):
     sensor = bme680.BME680(bme680.I2C_ADDR_SECONDARY)
 
-# These calibration data can safely be commented
-# out, if desired.
-
-print('Calibration data:')
-for name in dir(sensor.calibration_data):
-
-    if not name.startswith('_'):
-        value = getattr(sensor.calibration_data, name)
-
-        if isinstance(value, int):
-            print('{}: {}'.format(name, value))
 
 # These oversampling settings can be tweaked to
 # change the balance between accuracy and noise in
