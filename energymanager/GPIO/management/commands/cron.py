@@ -25,7 +25,6 @@ class Command(BaseCommand):
             Humidities.save_humidity(round(data["humidity"], 2))
         
         if data["gas_resistance"]:
-            print(data["gas_resistance"])
             VOCs.save_voc(round(data["gas_resistance"], 2))
         
     def simulate_gpio():
