@@ -1,0 +1,2 @@
+LoadModule wsgi_module "/var/www/WSGI-script/.venv/lib/python3.13/site-packages/mod_wsgi/server/mod_wsgi-py313.cpython-313-aarch64-linux-gnu.so"
+WSGIPythonHome "/var/www/WSGI-script/.venv"

@@ -1,0 +1,1 @@
+*/5 * * * * /var/www/GPIO/.venv/bin/python3 /var/www/GPIO/manage.py cron >> /var/www/GPIO/cron.log 2>&1
