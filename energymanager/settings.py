@@ -91,7 +91,7 @@ DATABASES = {
 
 LOGGING = {
     "version": 1,
-    "disable_existing_loggers": True,
+    "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
             "format": "{levelname} | {asctime} | {message}",
@@ -162,9 +162,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "dist",
 ]
 
+print(STATICFILES_DIRS)
+
 DJANGO_VITE = {
     "default": {
-        "dev_mode": True
+        "dev_mode": False,
+        "manifest_path": BASE_DIR / "dist" / "manifest.json",
     }
 }
 DJANGO_VITE_STATIC_URL_PREFIX = 'dist'
