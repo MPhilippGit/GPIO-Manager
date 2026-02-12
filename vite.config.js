@@ -17,8 +17,8 @@ export default defineConfig({
             main: path.resolve(__dirname, "./frontend/main.jsx"),
          },
          output: {
-            entryFileNames: "[name]-[hash]-bundles.js",
-            assetFileNames: "[name]-[hash].[ext]",
+            entryFileNames: "[name]-bundles.js",
+            assetFileNames: "[name].[ext]",
          },
       },
    }
