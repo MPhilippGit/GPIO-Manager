@@ -27,7 +27,7 @@ class Temperatures(Measurements):
    def save_temp(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Temperatures(measurement=measurement, plausibility=plausibility, unit="Celsius", timestamp=timezone.now())
+         new_measurement = Temperatures(measurement=measurement, is_plausible=plausibility, unit="Celsius", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new temperature measurement: {measurement}")
       except Exception as error:
@@ -41,7 +41,7 @@ class Humidities(Measurements):
    def save_humidity(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Humidities(measurement=measurement, plausibility=plausibility, unit="rH", timestamp=timezone.now())
+         new_measurement = Humidities(measurement=measurement, is_plausible=plausibility, unit="rH", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new humidity measurement: {measurement}")
       except Exception as error:
@@ -55,7 +55,7 @@ class VOCs(Measurements):
    def save_voc(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = VOCs(measurement=measurement, plausibility=plausibility, unit="Ohm", timestamp=timezone.now())
+         new_measurement = VOCs(measurement=measurement, is_plausible=plausibility, unit="Ohm", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new voc measurement: {measurement}")
       except Exception as error:
@@ -69,7 +69,7 @@ class Pressures(Measurements):
    def save_pressure(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Pressures(measurement=measurement, plausibility=plausibility, unit="hPa", timestamp=timezone.now())
+         new_measurement = Pressures(measurement=measurement, is_plausible=plausibility, unit="hPa", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new pressure measurement: {measurement}")
       except Exception as error:
