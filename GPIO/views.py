@@ -1,6 +1,7 @@
 from energymanager.settings import BASE_DIR
 from django.shortcuts import render
 from django.template import loader
+from django.db.models import F
 from django.http import HttpResponse, JsonResponse, Http404
 from .models import SensorValues
 
@@ -9,17 +10,23 @@ def index(request):
    return HttpResponse(template.render({}, request))
 
 def fetch_temperatures(request):
-   data = list(SensorValues.objects.values("temperature", "timestamp", "is_plausible"))
+   data = list(SensorValues.objects.annotate(
+      measurement=F("temperature")
+   ).values("measurement", "timestamp", "is_plausible"))
    filter_data = data[-10:]
    return JsonResponse(filter_data, safe=False)
 
 def fetch_humidities(request):
-   data = list(SensorValues.objects.values("humidity", "timestamp", "is_plausible"))
+   data = list(SensorValues.objects.annotate(
+      measurement=F("temperature")
+   ).values("measurement", "timestamp", "is_plausible"))
    filter_data = data[-10:]
    return JsonResponse(filter_data, safe=False)
 
 def fetch_vocs(request):
-   data = list(SensorValues.objects.values("voc", "timestamp", "is_plausible"))
+   data = list(SensorValues.objects.annotate(
+      measurement=F("voc")
+   ).values("measurement", "timestamp", "is_plausible"))
    filter_data = data[-10:]
    return JsonResponse(filter_data, safe=False)
 
