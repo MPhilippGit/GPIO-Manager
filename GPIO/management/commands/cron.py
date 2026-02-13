@@ -13,7 +13,13 @@ class Command(BaseCommand):
         return handler.get_full_read()
 
     def handle(self, *args, **options):
-        data = self.get_sensor_data()
+        try:
+            data = self.get_sensor_data()
+        except PermissionError:
+            logger = logging.getLogger(__name__)
+            logger.error("Unable to access I2C-Bus")
+            exit()
+        
 
         if data["temperature"]:
             Temperatures.save_temp(round(data["temperature"], 2))
@@ -34,5 +40,8 @@ class Command(BaseCommand):
         sim_humidity = round(random.uniform(30,60))
         Humidities.save_humidity(sim_humidity)
 
-        sim_vco = round(random.random(), 2)
+        sim_vco = round(random.uniform(300000, 600000))
         VOCs.save_voc(sim_vco)
+        
+        sim_pressure = round(random.uniform(980, 1010))
+        Pressures.save_voc(sim_pressure)

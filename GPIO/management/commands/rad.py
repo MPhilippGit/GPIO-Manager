@@ -1,12 +1,8 @@
-from gpiozero import InputDevice
-from datetime import datetime
-from signal import pause
+from django.core.management import BaseCommand
+from GPIO.sensors.rcwl import detect_motion
 
-sensor = InputDevice(5)
+class Command(BaseCommand):
+    help = "Adds a sensor measurements to the database"
 
-print(sensor)
-# sensor.when_motion = lambda: print(f"[{datetime.now().strftime('%H:%M:%S')}] Bewegung erkannt!")
-# sensor.when_no_motion = lambda: print(f"[{datetime.now().strftime('%H:%M:%S')}] Keine Bewegung mehr.")
-
-print("Warte auf Bewegung...")
-pause()
+    def handle(self, *args, **options):
+        print(detect_motion())
