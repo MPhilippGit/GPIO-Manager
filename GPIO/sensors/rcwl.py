@@ -1,10 +1,17 @@
 from gpiozero import MotionSensor
 from datetime import datetime
+import logging
 from signal import pause
 
 class RCWL:
     def __init__(self):
-        self.sensor = MotionSensor(5)
+        try:
+            self.sensor = MotionSensor(5)
+        except Exception as e:
+            logger = logging.getLogger(__name__)
+            logger.error("Radar sensor initialization failed")
+
+
 
     def detect_motion(self, duration_s=10):
         """

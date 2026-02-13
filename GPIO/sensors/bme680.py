@@ -56,25 +56,6 @@ class BME680Data:
         self.sensor.set_gas_heater_duration(150)
         self.sensor.select_gas_heater_profile(0)
 
-    def get_full_read(self):
-        self.prepare_voc_read()
-        """Trys to fetch data when heat is stable for gas measurement. Warning log if heat can't be stabilized"""
-        i = 0
-        while i < 10:
-            if not self.sensor.data.heat_stable:
-                i+=1
-                time.sleep(1)
-                continue
-            return self.data_dump()
-        BME680Data.log_unstable_read()
-        return self.data_dump()
-
-    @staticmethod
-    def log_unstable_read():
-        logger = logging.getLogger(__name__)
-        logger.error("No stable VOC read")
-
-
     def check_sensor(self):
         print("Open reading stream")
         self.prepare_voc_read()
