@@ -1,3 +1,4 @@
+import { color } from "chart.js/helpers";
 import { PATHS } from "../globals";
 
 const options = {
@@ -8,6 +9,7 @@ const options = {
                 suggestedMax: 30,
             },
         },
+        color: 'black',
         maintainAspectRatio: false,
         responsive: true,
         plugins: {
@@ -27,6 +29,7 @@ const options = {
                 suggestedMax: 100,
             },
         },
+        color: 'black',
         maintainAspectRatio: false,
         responsive: true,
         plugins: {
@@ -46,6 +49,7 @@ const options = {
                 suggestedMax: 1,
             },
         },
+        color: 'black',
         maintainAspectRatio: false,
         responsive: true,
         plugins: {

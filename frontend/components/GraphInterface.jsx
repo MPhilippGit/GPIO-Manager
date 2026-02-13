@@ -6,6 +6,13 @@ function GraphInterface({ setGraph }) {
         <div className="dash-sidebar_interface">
             <Button
                 className="btn-sidebar"
+                target="dashboard"
+                setGraph={setGraph}
+                text="Dashboard"
+                icon="layout-dashboard"
+            />
+            <Button
+                className="btn-sidebar"
                 target={PATHS.TEMP}
                 setGraph={setGraph}
                 text="Temperatures"

@@ -6,6 +6,7 @@ import { Sidebar } from './components/Sidebar.jsx';
 import { Board } from './components/Board.jsx';
 import { createRoot } from 'react-dom/client';
 import { PATHS } from './globals.js';
+import { Dashboard } from './components/Dashboard.jsx';
 
 const root = createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +21,7 @@ function App() {
     return (
         <div className='dash'>
             <Sidebar graph={graph} setGraph={setGraph} />
-            <Board graph={graph} setGraph={setGraph} />
+            {graph === "dashboard" ? <Dashboard /> : <Board graph={graph} setGraph={setGraph} />}
         </div>
     )
 }

@@ -1,0 +1,15 @@
+@use "../theme/includes" as t;
+
+.dash-board {
+    background: t.$gradient-bg;
+    h1 {
+        color: white;
+    }
+
+    &_measurements {
+        min-height: 70%;
+        background: t.$gradient-shift;
+        border-radius: t.$border-radius-base;
+        @include t.interface-shadow();
+    }
+}

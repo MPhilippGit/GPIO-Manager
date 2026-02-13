@@ -4,6 +4,8 @@
 
 // === Base Colors ===
 $bg-dark: #0d1117;
+$bg-medium-dark: #192639;
+$bg-light-red: #d7b5c6a3;
 $bg-panel: #161b22;
 $text-primary: #e6edf3;
 $text-muted: #8b949e;
@@ -18,7 +20,9 @@ $accent-red: #ff3b30;
 // === Gradients ===
 $gradient-blue: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
 $gradient-primary: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
-$gradient-energy: linear-gradient(135deg, $accent-green 0%, $accent-orange 100%);
+$gradient-energy: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
+$gradient-shift: radial-gradient(circle at 20% 20%, #23596b 0%, $bg-dark 100%);
+$gradient-light-red: radial-gradient(circle at 20% 20%, #f4f2f3 0%, $bg-light-red 100%);
 $gradient-bg: radial-gradient(circle at 20% 20%, #1a3459 0%, $bg-dark 100%);
 
 // === Font & Layout ===
@@ -38,6 +42,10 @@ $transition-fast: 0.2s ease-in-out;
 
 @mixin card-shadow {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+@mixin interface-shadow {
+    box-shadow: inset 1px 2px 8px black;
 }
 
 @mixin hover-lift {
