@@ -7,6 +7,7 @@ import logging
 class Measurements(models.Model):
    unit = models.CharField(max_length=50, db_column="unit")
    timestamp = models.DateTimeField(db_column="timestamp")
+   is_plausible = models.BooleanField(db_column="is_plausible")
 
    class Meta:
       abstract = True
@@ -18,14 +19,15 @@ class Measurements(models.Model):
       deleted, _ = result.delete()
       return deleted
 
+
 class Temperatures(Measurements):
    measurement =  models.DecimalField(max_digits=5, decimal_places=2, db_column="measurement")
 
    @staticmethod
-   def save_temp(measurement):
+   def save_temp(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Temperatures(measurement=measurement, unit="Celsius", timestamp=timezone.now())
+         new_measurement = Temperatures(measurement=measurement, plausibility=plausibility, unit="Celsius", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new temperature measurement: {measurement}")
       except Exception as error:
@@ -36,10 +38,10 @@ class Humidities(Measurements):
    measurement =  models.DecimalField(max_digits=5, decimal_places=2, db_column="measurement")
 
    @staticmethod
-   def save_humidity(measurement):
+   def save_humidity(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Humidities(measurement=measurement, unit="rH", timestamp=timezone.now())
+         new_measurement = Humidities(measurement=measurement, plausibility=plausibility, unit="rH", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new humidity measurement: {measurement}")
       except Exception as error:
@@ -50,10 +52,10 @@ class VOCs(Measurements):
    measurement =  models.DecimalField(max_digits=8, decimal_places=2, db_column="measurement")
 
    @staticmethod
-   def save_voc(measurement):
+   def save_voc(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = VOCs(measurement=measurement, unit="ppm", timestamp=timezone.now())
+         new_measurement = VOCs(measurement=measurement, plausibility=plausibility, unit="Ohm", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new voc measurement: {measurement}")
       except Exception as error:
@@ -64,10 +66,10 @@ class Pressures(Measurements):
    measurement =  models.DecimalField(max_digits=5, decimal_places=2, db_column="measurement")
 
    @staticmethod
-   def save_pressure(measurement):
+   def save_pressure(measurement, plausibility):
       logger = logging.getLogger(__name__)
       try:
-         new_measurement = Pressures(measurement=measurement, unit="hPa", timestamp=timezone.now())
+         new_measurement = Pressures(measurement=measurement, plausibility=plausibility, unit="hPa", timestamp=timezone.now())
          new_measurement.save()
          logger.info(f"new pressure measurement: {measurement}")
       except Exception as error:

@@ -20,6 +20,28 @@ class BME680Data:
                 data_dict[name] = value
         return data_dict
 
+    def set_data(self):
+        self.prepare_voc_read()
+        start = time.perf_counter()
+        while time.perf_counter() - start < 15:
+            if self.sensor.get_sensor_data():
+                self.temperature = round(self.sensor.data.temperature, 2)
+                self.pressure = round(self.sensor.data.pressure, 2)
+                self.humidity = round(self.sensor.data.humidity, 2)
+                if self.sensor.data.heat_stable:
+                    self.voc = round(self.sensor.data.gas_resistance, 2)
+                    return self
+        # if voc value can't be established after
+        raise IOError
+
+    def to_dict(self):
+        return {
+            "temperature": self.temperature,
+            "pressure": self.pressure,
+            "voc": self.voc,
+            "humidity": self.humidity
+        }
+
     def configure(self):
         """Sets sample and filter sizes"""
         self.sensor.set_humidity_oversample(bme680.OS_2X)
@@ -50,21 +72,26 @@ class BME680Data:
     @staticmethod
     def log_unstable_read():
         logger = logging.getLogger(__name__)
-        logger.warning("No stable VOC read")
+        logger.error("No stable VOC read")
 
 
+    def check_sensor(self):
+        print("Open reading stream")
+        self.prepare_voc_read()
+        print(f"Initial read: {self.data_dump()}")
+        try:
+            while True:
+                if self.sensor.get_sensor_data():
+                    output = f"{self.sensor.data.temperature} C,{self.sensor.data.pressure} hPa,{self.sensor.data.humidity} %RH"
+                    if self.sensor.data.heat_stable:
+                        output = output + f", {self.sensor.data.gas_resistance}"
+                    else:
+                        print("Heat unstable...")
+                    print(output)
+                else:
+                    print("Preparing data...")
+                time.sleep(5)
 
-# sampling settings
+        except KeyboardInterrupt:
+            print("Beende Monitoring...")
 
-# for name in dir(sensor.data):
-#     value = getattr(sensor.data, name)
-
-#     if not name.startswith('_'):
-#         print('{}: {}'.format(name, value))
-
-
-
-# # Up to 10 heater profiles can be configured, each
-# # with their own temperature and duration.
-# # sensor.set_gas_heater_profile(200, 150, nb_profile=1)
-# # sensor.select_gas_heater_profile(1)

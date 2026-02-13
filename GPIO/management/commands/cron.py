@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from GPIO.models import Temperatures, Humidities, VOCs, Pressures 
 from GPIO.sensors.bme680 import BME680Data
+from GPIO.sensors.rcwl import RCWL
 import random
 import logging
 
@@ -8,40 +9,45 @@ import logging
 class Command(BaseCommand):
     help = "Adds a sensor measurements to the database"
 
-    def get_sensor_data(self):
+    def get_sensor_instance(self):
         handler = BME680Data()
-        return handler.get_full_read()
+        return handler.set_data()
+
+    def is_plausible(self):
+        radar_sensor = RCWL()
+        return radar_sensor.detect_motion()
 
     def handle(self, *args, **options):
+        plausibility = self.is_plausible()
+
         try:
-            data = self.get_sensor_data()
-        except PermissionError:
+            data = self.get_sensor_instance().to_dict()
+        except (IOError, PermissionError) as e:
             logger = logging.getLogger(__name__)
-            logger.error("Unable to access I2C-Bus")
+            logger.error(f"{e} no read possible")
             exit()
-        
 
         if data["temperature"]:
-            Temperatures.save_temp(round(data["temperature"], 2))
+            Temperatures.save_temp(data["temperature"], plausibility)
 
         if data["pressure"]:
-            Pressures.save_pressure(round(data["pressure"], 2))
+            Pressures.save_pressure(data["pressure"], plausibility)
 
         if data["humidity"]:
-            Humidities.save_humidity(round(data["humidity"], 2))
+            Humidities.save_humidity(data["humidity"], plausibility)
         
-        if data["gas_resistance"]:
-            VOCs.save_voc(round(data["gas_resistance"], 2))
+        if data["voc"]:
+            VOCs.save_voc(data["voc"], plausibility)
         
     def simulate_gpio():
         sim_temp = round(random.uniform(18,26))
-        Temperatures.save_temp(sim_temp)
+        Temperatures.save_temp(sim_temp, False)
     
         sim_humidity = round(random.uniform(30,60))
-        Humidities.save_humidity(sim_humidity)
+        Humidities.save_humidity(sim_humidity, False)
 
         sim_vco = round(random.uniform(300000, 600000))
-        VOCs.save_voc(sim_vco)
+        VOCs.save_voc(sim_vco, False)
         
         sim_pressure = round(random.uniform(980, 1010))
-        Pressures.save_voc(sim_pressure)
+        Pressures.save_voc(sim_pressure, False)

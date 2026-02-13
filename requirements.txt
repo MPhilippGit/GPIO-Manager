@@ -8,6 +8,7 @@ importlib-metadata==4.13.0
 importlib-resources==5.13.0
 mod-wsgi==5.0.2
 mysqlclient==2.2.7
+rpi-gpio==0.7.1
 setuptools==80.10.1
 smbus2==0.5.0
 sqlparse==0.5.3
