@@ -162,7 +162,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "dist",
 ]
 
-print(STATICFILES_DIRS)
 
 DJANGO_VITE = {
     "default": {

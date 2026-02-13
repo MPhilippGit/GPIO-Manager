@@ -13,7 +13,7 @@ class Measurements(models.Model):
 
    @classmethod
    def cleanup_entries(cls, timespan=30):
-      cutoff = timezone.now() - timezone.timedelta(minutes=60)
+      cutoff = timezone.now() - timezone.timedelta(days=timespan)
       result = cls.objects.filter(timestamp__gt=cutoff)
       deleted, _ = result.delete()
       return deleted
