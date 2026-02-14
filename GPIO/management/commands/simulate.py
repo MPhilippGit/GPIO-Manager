@@ -25,9 +25,9 @@ class Command(BaseCommand):
 
     def simulate_gpio(self):
         return {
-            "temperature": random.uniform(22, 24),
-            "voc": random.uniform(24000,40000),
-            "humidity": random.uniform(40, 60),
-            "pressure": random.uniform(980,995),
+            "temperature": round(random.uniform(22, 24), 2),
+            "voc": round(random.uniform(24000,40000), 2),
+            "humidity": round(random.uniform(40, 60), 2),
+            "pressure": round(random.uniform(980,995), 2),
             "is_plausible": True
         }

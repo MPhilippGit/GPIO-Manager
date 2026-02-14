@@ -6,5 +6,6 @@ urlpatterns = [
     path("api/temps", views.fetch_temperatures, name="temps"),
     path("api/humids", views.fetch_humidities, name="humids"),
     path("api/vocs", views.fetch_vocs, name="vocs"),
+    path("api/all", views.fetch_latest, name="latest"),
     path("logs", views.fetch_log, name="log")
 ]

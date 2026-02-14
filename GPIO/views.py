@@ -30,6 +30,18 @@ def fetch_vocs(request):
    filter_data = data[-10:]
    return JsonResponse(filter_data, safe=False)
 
+def fetch_latest(request):
+   data = SensorValues.objects.latest("timestamp")
+   result = {
+      "temperature": data.temperature,
+      "humidity": data.humidity,
+      "voc": data.voc,
+      "pressure": data.pressure,
+      "is_plausible": data.is_plausible,
+      "timestamp": data.timestamp
+   }
+   return JsonResponse(result)
+
 def fetch_log(request):
    logfile = BASE_DIR / "app.log"
    logcontent = []
