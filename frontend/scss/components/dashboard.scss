@@ -10,6 +10,28 @@
         min-height: 70%;
         background: t.$gradient-shift;
         border-radius: t.$border-radius-base;
+        padding: 2rem 1.5rem;
         @include t.interface-shadow();
+
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+
+        .latest {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            border-radius: t.$border-radius-base;
+
+            &_box {
+                display: inline-flex;
+                justify-content: center;
+                padding: 3rem;
+                border-radius: t.$border-radius-base;
+                
+                gap: 12px;
+                @include t.interface-shadow();
+                align-items: center;
+            }
+        }
     }
 }
