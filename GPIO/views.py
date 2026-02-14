@@ -40,7 +40,7 @@ def fetch_latest(request):
       "is_plausible": data.is_plausible,
       "timestamp": data.timestamp
    }
-   return JsonResponse(result)
+   return JsonResponse(result, safe=False)
 
 def fetch_log(request):
    logfile = BASE_DIR / "app.log"
