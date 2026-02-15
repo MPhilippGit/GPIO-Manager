@@ -24,7 +24,6 @@ rsync -av --delete \
 
 # ===== Alles weitere als User =====
 echo "🐍 Python Setup..."
-set -e
 
 cd /var/www/GPIO
 
@@ -34,7 +33,7 @@ if [ ! -d ".venv" ]; then
     uv venv .venv
 fi
 
-uv pip install -r requirements.txt
+uv sync
 
 python3 manage.py makemigrations
 python3 manage.py migrate
