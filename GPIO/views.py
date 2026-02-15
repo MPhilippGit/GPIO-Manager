@@ -59,4 +59,4 @@ def fetch_log(request):
 def predict_persons(request, voc_value):
    model = VOCRegressionModel()
    result = model.predict(voc_value)
-   return JsonResponse(result)
+   return JsonResponse(result, safe=False)

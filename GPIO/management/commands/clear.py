@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from GPIO.models import Temperatures, Humidities, VOCs, Pressures
+from GPIO.models import SensorValues
 import logging
 
 
@@ -12,7 +12,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         logger = logging.getLogger(__name__)
         
-        self.log_cleanup(logger, Temperatures, Temperatures.cleanup_entries())
-        self.log_cleanup(logger, Pressures, Pressures.cleanup_entries())
-        self.log_cleanup(logger, VOCs, VOCs.cleanup_entries())
-        self.log_cleanup(logger, Humidities, Humidities.cleanup_entries())
+        self.log_cleanup(logger, SensorValues, SensorValues.cleanup_entries(SensorValues))
