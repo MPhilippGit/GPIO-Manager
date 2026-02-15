@@ -11,7 +11,7 @@ echo "🚀 Deployment startet..."
 
 # ===== Sync (braucht root) =====
 echo "🔄 Code Sync..."
-sudo rsync -av --delete \
+rsync -av --delete \
     --exclude='.git' \
     --exclude='__pycache__' \
     --exclude='*.pyc' \
@@ -22,16 +22,13 @@ sudo rsync -av --delete \
     --exclude='staticroot' \
     ./ "$APP_DIR/"
 
-# ===== Rechte für User =====
-echo "🔐 Setze Rechte..."
-sudo chown -R "$USER:$GROUP" "$APP_DIR"
-
 # ===== Alles weitere als User =====
 echo "🐍 Python Setup..."
-sudo -u "$USER" bash <<'EOF'
 set -e
 
 cd /var/www/GPIO
+
+whoami
 
 if [ ! -d ".venv" ]; then
     uv venv .venv
@@ -46,6 +43,9 @@ npm install
 npm run build
 
 python3 manage.py collectstatic --noinput
-EOF
+
+# ===== Rechte für User =====
+echo "🔐 Setze Rechte..."
+sudo chown -R "$USER:$GROUP" "$APP_DIR"
 
 echo "✅ Deployment fertig!"
