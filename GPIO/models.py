@@ -30,3 +30,16 @@ class SensorValues(models.Model):
          is_plausible=data["is_plausible"]
       )
       entry.save()
+
+
+class SensorCSVExporter:
+   HEADERS = ["timestamp", "temperature", "voc_value"]
+
+   @staticmethod
+   def row(sensor_data: SensorValues):
+      timestamp, temperature, voc_value = SensorCSVExporter.HEADERS
+      return {
+         timestamp: sensor_data.timestamp,
+         temperature: sensor_data.temperature,
+         voc_value: sensor_data.voc
+      }

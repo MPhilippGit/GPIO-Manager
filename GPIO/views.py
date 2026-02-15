@@ -4,7 +4,7 @@ from django.template import loader
 from django.db.models import F
 from django.http import HttpResponse, JsonResponse, Http404
 from .models import SensorValues
-from .regression import VOCRegressionModel
+from .regression import VOCRegressionModel, TemperatureRegressionModel
 
 def index(request):
    template = loader.get_template("GPIO/dashboard.html")
@@ -59,4 +59,9 @@ def fetch_log(request):
 def predict_persons(request, voc_value):
    model = VOCRegressionModel()
    result = model.predict(voc_value)
+   return JsonResponse(result, safe=False)
+
+def predict_temperature(request, temp_value):
+   model = TemperatureRegressionModel()
+   result = model.predict(temp_value)
    return JsonResponse(result, safe=False)

@@ -6,7 +6,7 @@ import logging
 
 
 class Command(BaseCommand):
-    help = "Adds a sensor measurements to the database"
+    help = "Generates data for db for testing. Do not use in production."
 
     def handle(self, *args, **options):
         logger = logging.getLogger(__name__)

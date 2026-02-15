@@ -19,3 +19,4 @@ static/
 app.log
 cron.log
 staticroot
+trainingdata/trained.csv
