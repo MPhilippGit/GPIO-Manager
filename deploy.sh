@@ -30,10 +30,11 @@ rsync -av --delete \
 cd "$APP_DIR"
 
 echo "🐍 Erstelle Virtualenv..."
-uv venv .venv
+python3 -m venv .venv
+source .venv/bin/activate
 
 echo "📦 Installiere Python Dependencies..."
-uv pip install -r requirements.txt
+pip install -r requirements.txt
 
 echo "🗄️ Datenbank Migrationen..."
 python3 manage.py makemigrations
