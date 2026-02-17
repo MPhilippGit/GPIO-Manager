@@ -8,6 +8,7 @@ USER="it"
 GROUP="www-data"
 
 echo "🚀 Deployment startet..."
+rm -rf /var/www/GPIO/*
 
 # ===== Sync (braucht root) =====
 echo "🔄 Code Sync..."
