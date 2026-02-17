@@ -14,11 +14,12 @@
 
         display: grid;
         grid-template-columns: 1fr 3fr;
+        column-gap: .8rem;
 
         .latest {
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: space-between;
             border-radius: t.$border-radius-base;
             
 
@@ -58,6 +59,11 @@
                 }
             }
         }
+    }
 
+    &_measurements {
+        canvas {
+            background-color: white;
+        }
     }
 }

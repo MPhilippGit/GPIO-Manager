@@ -1,6 +1,7 @@
 import "../scss/components/dashboard.scss";
 import { Icon } from "./Icon";
 import { useEffect, useState } from "react";
+import RegressionChart from "./RegressionChart";
 
 function Measurement({ value, unit, icon, refreshKey }) {
     return (
@@ -48,38 +49,51 @@ function Dashboard() {
         <div className="dash-container dash-board">
             <div className="dash-board_measurements">
                 <div className="latest">
-                    <h2>Messwerte</h2>
-                    <Measurement 
+                    <h4>Messwerte</h4>
+                    <Measurement
                         refreshKey={refreshKey}
                         value={latest.pressure}
                         unit={"hPa"}
                         icon={<Icon name="circle-gauge" size={32} />}
                     />
-                    <Measurement 
+                    <Measurement
                         refreshKey={refreshKey}
                         value={latest.humidity}
                         unit={"rH[%]"}
                         icon={<Icon name="bubbles" size={32} />}
                     />
-                    <Measurement 
+                    <Measurement
                         refreshKey={refreshKey}
                         value={latest.voc}
                         unit={"Ohm"}
                         icon={<Icon name="spray-can" size={32} />}
                     />
-                    <Measurement 
+                    <Measurement
                         refreshKey={refreshKey}
                         value={latest.temperature}
                         unit={"°C"}
-                        icon={<Icon name="thermometer" color="white" size={32} />}
+                        icon={
+                            <Icon name="thermometer" color="white" size={32} />
+                        }
                     />
                     <div>
                         <Refresher onClick={refresh} />
                     </div>
                 </div>
+                <div className="dash-board_regression">
+                    <RegressionChart
+                        data={[
+                            { x: 1, y: 10 },
+                            { x: 2, y: 15 },
+                            { x: 3, y: 14 },
+                            { x: 4, y: 20 },
+                            { x: 5, y: 18 },
+                        ]}
+                    />
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export { Dashboard };

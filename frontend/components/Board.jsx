@@ -31,6 +31,7 @@ function Board({ graph }) {
     }
     const tempValues = data.map(value => value.measurement)
     const labelValues = data.map(value => {
+        if (!value) return null;
         const timestamp = new TimeFormatter(value.timestamp)
         return timestamp.getGraphFormat();
     })
