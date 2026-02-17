@@ -68,9 +68,16 @@ def fetch_training_data(request):
    
    return JsonResponse(result, safe=False)
 
-def predict_persons(request, voc_value):
+def predict_persons(request):
    model = VOCRegressionModel()
-   result = model.predict(voc_value)
+   result = {
+      "model": {
+         "slope": model.get_slope(),
+         "intercept": model.get_intercept(),
+         "r2_score": model.get_r2_scrore()
+      },
+      "data": model.get_training_data()
+   }
    return JsonResponse(result, safe=False)
 
 def predict_temperature(request, temp_value):

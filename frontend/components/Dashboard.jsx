@@ -86,13 +86,7 @@ function Dashboard() {
                     <h4>Regression</h4>
                     <div className="dash-board_regression-regression">
                         <RegressionChart
-                            data={[
-                                { x: 1, y: 10 },
-                                { x: 2, y: 15 },
-                                { x: 3, y: 14 },
-                                { x: 4, y: 20 },
-                                { x: 5, y: 18 },
-                            ]}
+                            prediction={"predict/guests"}
                         />
                     </div>
                     <div className="dash-board_regression-predictions">

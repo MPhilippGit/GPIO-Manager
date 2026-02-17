@@ -7,8 +7,13 @@ from GPIO.models import SensorValues, SensorCSVExporter
 
 
 class VOCRegressionModel:
+    FILE_REFERENCE = BASE_DIR / "trainingdata" / "basedata.csv"
+
+    """
+    Builds a model that can predict the amount of persons based on the voc data
+    """
     def __init__(self):
-        self.df = pd.read_csv(BASE_DIR / "trainingdata" / "basedata.csv")
+        self.df = pd.read_csv(self.FILE_REFERENCE)
         self.model = LinearRegression()
         self.r2_score = None
         self._train()
@@ -22,16 +27,31 @@ class VOCRegressionModel:
         y_pred = self.model.predict(X)
         self.r2_score = r2_score(y, y_pred)
 
-    def predict(self, voc_value: float) -> dict:
-        prediction = self.model.predict([[voc_value]])[0]
+    def get_r2_scrore(self):
+        return self.r2_score
 
-        return {
-            "voc": voc_value,
-            "predicted": round(prediction),
-            "r2_score": round(self.r2_score, 4)
-        }
+    def get_slope(self):
+        return self.model.coef_[0]
+
+    def get_intercept(self):
+        return self.model.intercept_
+
+    def get_training_data(self):
+        training_data = []
+        with self.FILE_REFERENCE.open("r") as file:
+            file_data = csv.DictReader(file)
+            
+            for data_row in file_data:
+                training_data.append({
+                    "voc": data_row["voc_value"],
+                    "target": data_row["persons_estimated"]
+                })
+        return training_data
 
 class TemperatureRegressionModel:
+    """
+    Builds a model that can predict temperatures based on the voc data
+    """
     def __init__(self):
         self.df = pd.read_csv(BASE_DIR / "trainingdata" / "basedata.csv")
         self.model = LinearRegression()
@@ -47,14 +67,14 @@ class TemperatureRegressionModel:
         y_pred = self.model.predict(X)
         self.r2_score = r2_score(y, y_pred)
 
-    def predict(self, voc_value: float) -> dict:
-        prediction = self.model.predict([[voc_value]])[0]
+    def get_r2_scrore(self):
+        return self.r2_score
 
-        return {
-            "voc": voc_value,
-            "predicted": round(prediction),
-            "r2_score": round(self.r2_score, 4)
-        }
+    def get_slope(self):
+        return self.model.coef_[0]
+
+    def get_intercept(self):
+        return self.model.intercept_
 
 class TrainingData:
     file = BASE_DIR / "trainingdata" / "trained.csv"
