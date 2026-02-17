@@ -2,11 +2,10 @@
 
 .dash-board {
     background: t.$gradient-bg;
-    h1 {
-        color: white;
-    }
-
+    color: white;
+    
     &_measurements {
+        animation: boardInitializer .3s ease-in-out forwards;
         min-height: 70%;
         background: t.$gradient-shift;
         border-radius: t.$border-radius-base;
@@ -21,17 +20,41 @@
             flex-direction: column;
             justify-content: space-around;
             border-radius: t.$border-radius-base;
+            
 
             &_box {
                 display: inline-flex;
                 justify-content: center;
-                padding: 3rem;
+                padding: 1rem 3rem;
                 border-radius: t.$border-radius-base;
-                
+                background: t.$gradient-bg;
+                animation: fadeIn .3s ease-in;
+
                 gap: 12px;
                 @include t.interface-shadow();
                 align-items: center;
+
+                svg {
+                    animation: fadeIn .3s ease-in forwards;
+                    stroke: transparent;
+                }
+            }
+
+            .btn-refresh {
+                display: inline-flex;
+                align-items: center;
+                border-radius: t.$border-radius-base;
+                background-color: t.$accent-blue;
+                border: 0;
+                padding: 0.4rem 1rem;
+                color: white;
+                outline: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
+
     }
 }

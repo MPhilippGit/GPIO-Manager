@@ -2,11 +2,9 @@ import "../scss/components/dashboard.scss";
 import { Icon } from "./Icon";
 import { useEffect, useState } from "react";
 
-function Measurement({ value, unit, icon }) {
-    
-
+function Measurement({ value, unit, icon, refreshKey }) {
     return (
-        <div className="latest_box">
+        <div key={refreshKey} className="latest_box">
             {icon}
             {value}
             <span>{unit}</span>
@@ -14,10 +12,11 @@ function Measurement({ value, unit, icon }) {
     )
 }
 
-function Refresher () {
+function Refresher ({ onClick }) {
     return (
-        <button className="btn-primary">
+        <button onClick={onClick} className="btn-primary btn-refresh">
             <Icon name="refresh-cw"/>
+            Refresh
         </button>
     )
 }
@@ -29,6 +28,10 @@ function Dashboard() {
     useEffect(() => {
         fetchLatest("api/all")
     }, [refreshKey])
+
+    const refresh = () => {
+        setRefreshKey(refreshKey + 1)
+    }
 
     const fetchLatest = async (endpoint) => {
         try {
@@ -43,31 +46,34 @@ function Dashboard() {
 
     return (
         <div className="dash-container dash-board">
-            <h1>Hello</h1>
             <div className="dash-board_measurements">
                 <div className="latest">
                     <Measurement 
+                        refreshKey={refreshKey}
                         value={latest.pressure}
                         unit={"hPa"}
-                        icon={<Icon name="circle-gauge" color="black" size={32} />}
+                        icon={<Icon name="circle-gauge" size={32} />}
                     />
                     <Measurement 
+                        refreshKey={refreshKey}
                         value={latest.humidity}
                         unit={"rH[%]"}
-                        icon={<Icon name="bubbles" color="black" size={32} />}
+                        icon={<Icon name="bubbles" size={32} />}
                     />
                     <Measurement 
+                        refreshKey={refreshKey}
                         value={latest.voc}
                         unit={"Ohm"}
-                        icon={<Icon name="spray-can" color="black" size={32} />}
+                        icon={<Icon name="spray-can" size={32} />}
                     />
                     <Measurement 
+                        refreshKey={refreshKey}
                         value={latest.temperature}
                         unit={"°C"}
-                        icon={<Icon name="thermometer" color="black" size={32} />}
+                        icon={<Icon name="thermometer" color="white" size={32} />}
                     />
                     <div>
-                        <Refresher onClick={() => setRefreshKey(k => k+1)} />
+                        <Refresher onClick={refresh} />
                     </div>
                 </div>
             </div>

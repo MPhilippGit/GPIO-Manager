@@ -2,6 +2,8 @@
 
 .dash-main {
     &_graph {
+        animation: boardInitializer .3s ease-in-out forwards;
+
         canvas {
             border-radius: t.$border-radius-base;
             padding: 2rem;

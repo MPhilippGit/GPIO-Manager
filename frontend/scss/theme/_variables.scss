@@ -13,12 +13,12 @@ $text-muted: #8b949e;
 // === Accent Colors ===
 $accent-green: #00e887;
 $accent-orange: #ff8a00;
-$accent-blue: #0a84ff;
+$accent-blue: #258cc8;
 $accent-purple: #7b61ff;
 $accent-red: #ff3b30;
 
 // === Gradients ===
-$gradient-blue: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
+$gradient-blue: linear-gradient(135deg, #0a84ff 0%, #7b61ff 100%);
 $gradient-primary: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
 $gradient-energy: linear-gradient(135deg, $accent-blue 0%, $accent-purple 100%);
 $gradient-shift: radial-gradient(circle at 20% 20%, #23596b 0%, $bg-dark 100%);
@@ -67,4 +67,27 @@ $chart-colors: (
 
 @function chart-color($key) {
     @return map-get($chart-colors, $key);
+}
+
+@keyframes fadeIn {
+    0% {
+        color: transparent;
+        stroke: transparent;
+    }
+    100% {
+        color: white;
+        stroke: white;
+    }
+    
+}
+
+@keyframes boardInitializer {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

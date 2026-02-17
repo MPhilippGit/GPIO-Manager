@@ -16,7 +16,7 @@ root.render(
 );
 
 function App() {
-    const [ graph, setGraph ] = useState(PATHS.TEMP);
+    const [ graph, setGraph ] = useState(PATHS.DASHBOARD);
 
     return (
         <div className='dash'>
