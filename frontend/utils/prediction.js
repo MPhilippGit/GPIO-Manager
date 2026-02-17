@@ -7,11 +7,12 @@ class PredictionHelper {
     }
 
     predict(x) {
-        return this.slope*x + intercept;
+        return Math.round(this.slope*x + this.intercept);
     }
 
-    getYValues(data) {
-        return data.map(x => this.predict(x))
+    getXYValues(data) {
+        console.log(data, "this should be only voc values")
+        return data.map(x => [x, this.predict(x)])
     }
 }
 

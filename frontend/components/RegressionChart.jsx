@@ -9,7 +9,6 @@ import {
     CategoryScale,
 } from "chart.js";
 import { Scatter } from "react-chartjs-2";
-import regression from "regression";
 import { PredictionHelper } from "../utils/prediction";
 
 ChartJS.register(
@@ -44,8 +43,9 @@ function RegressionChart({ prediction }) {
         return regressionModelData.data.map(entry => [entry.voc, entry.target]);
     }
 
-    const getRegressionHandler = () => {
-        return new PredictionHelper(regressionModelData.model.slope, regressionModelData.model.intercept)
+    const getRegressionLine = () => {
+        const handler = new PredictionHelper(regressionModelData.model.slope, regressionModelData.model.intercept)
+        return handler.getXYValues(regressionModelData.data.map(entry => entry.voc));
     }
 
     const options = {
@@ -87,6 +87,7 @@ function RegressionChart({ prediction }) {
             {
                 type: "line",
                 label: "Linear Regression",
+                data: regressionModelData.data && getRegressionLine(),
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 2,
                 fill: false,
