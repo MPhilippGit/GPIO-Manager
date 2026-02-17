@@ -41,6 +41,15 @@
                 }
             }
 
+            &_prediction {
+                display: inline-flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: t.$border-radius-base;
+                background-color: t.$bg-dark;
+            }
+
             .btn-refresh {
                 display: inline-flex;
                 align-items: center;

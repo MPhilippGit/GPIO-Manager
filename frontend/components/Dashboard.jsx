@@ -3,12 +3,14 @@ import { Icon } from "./Icon";
 import { useEffect, useState } from "react";
 import RegressionChart from "./RegressionChart";
 
-function Measurement({ value, unit, icon, refreshKey }) {
+function Measurement({ value, unit, icon, refreshKey, prediction }) {
     return (
-        <div key={refreshKey} className="latest_box">
+        <div key={refreshKey} className={prediction ? "latest_prediction": "latest_box"}>
+            {prediction && <p>{prediction}</p>}
             {icon}
-            {value}
-            <span>{unit}</span>
+            <span>
+                {value} {unit}
+            </span>
         </div>
     )
 }
@@ -81,15 +83,33 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="dash-board_regression">
-                    <RegressionChart
-                        data={[
-                            { x: 1, y: 10 },
-                            { x: 2, y: 15 },
-                            { x: 3, y: 14 },
-                            { x: 4, y: 20 },
-                            { x: 5, y: 18 },
-                        ]}
-                    />
+                    <h4>Regression</h4>
+                    <div className="dash-board_regression-regression">
+                        <RegressionChart
+                            data={[
+                                { x: 1, y: 10 },
+                                { x: 2, y: 15 },
+                                { x: 3, y: 14 },
+                                { x: 4, y: 20 },
+                                { x: 5, y: 18 },
+                            ]}
+                        />
+                    </div>
+                    <div className="dash-board_regression-predictions">
+                        <h4>Predictions</h4>
+                        <Measurement
+                            prediction={"Vorhergesagter Tempearaturwert:"}
+                            refreshKey={refreshKey}
+                            value={latest.temperature}
+                            unit={"°C"}
+                        />
+                        <Measurement
+                            prediction={"R-Wert"}
+                            refreshKey={refreshKey}
+                            value={latest.humidity}
+                            unit={"rH[%]"}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

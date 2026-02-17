@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
     Chart as ChartJS,
     LinearScale,
@@ -21,6 +21,7 @@ ChartJS.register(
 );
 
 function RegressionChart({ data }) {
+    const [ regressionData, setRegressiondata ] = useState([]);
     /**
      * data format expected:
      * [
@@ -30,8 +31,36 @@ function RegressionChart({ data }) {
      * ]
      */
 
+
+    const fetchRegressionData = async (endpoint) => {
+        try {
+            const response = await fetch(endpoint);
+            const result = await response.json();
+            setRegressiondata(result)
+        } catch (error) {
+            console.error(error.message);
+            setLatest([]);
+        }
+    };
+
+    const extractTargetValues = (data) => {
+        const resultData = []
+        
+        for (const row of data) {
+            resultData.push({
+                "x": row["voc_value"],
+                "y": row["persons_estimated"]
+            })
+        }
+        return resultData;
+    }
+
     const chartData = useMemo(() => {
-        if (!data || data.length === 0) return null;
+        fetchRegressionData("api/regression")
+
+        const scatterData = extractTargetValues(regressionData);
+
+        if (!scatterData || scatterData.length === 0) return null;
 
         // Calculate regression
         const regressionResult = regression.linear(
@@ -43,13 +72,15 @@ function RegressionChart({ data }) {
             y: regressionResult.predict(point.x)[1],
         }));
 
+        console.log(regressionPoints);
+
         return {
             datasets: [
                 // Dataset 1: Raw Points
                 {
                     type: "scatter",
                     label: "Measurements",
-                    data: data,
+                    data: scatterData,
                     backgroundColor: "rgba(54, 162, 235, 0.8)",
                     pointRadius: 4,
                 },
@@ -58,7 +89,6 @@ function RegressionChart({ data }) {
                 {
                     type: "line",
                     label: "Linear Regression",
-                    data: regressionPoints,
                     borderColor: "rgba(255, 99, 132, 1)",
                     borderWidth: 2,
                     fill: false,
@@ -93,9 +123,9 @@ function RegressionChart({ data }) {
         },
     };
 
-    if (!chartData) return null;
-
-    return <Scatter data={chartData} options={options} />;
+    return (
+        <Scatter data={chartData} options={options} />
+    )
 }
 
 export default RegressionChart;

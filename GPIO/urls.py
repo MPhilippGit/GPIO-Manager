@@ -7,6 +7,7 @@ urlpatterns = [
     path("api/humids", views.fetch_humidities, name="humids"),
     path("api/vocs", views.fetch_vocs, name="vocs"),
     path("api/all", views.fetch_latest, name="latest"),
+    path("api/regression", views.fetch_training_data, name="regression"),
     path("logs", views.fetch_log, name="log"),
     path('predict/guests/<int:voc_value>/', views.predict_persons),
     path('predict/temperature/<int:temp_value>/', views.predict_temperature),

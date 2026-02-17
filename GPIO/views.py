@@ -5,6 +5,7 @@ from django.db.models import F
 from django.http import HttpResponse, JsonResponse, Http404
 from .models import SensorValues
 from .regression import VOCRegressionModel, TemperatureRegressionModel
+import csv
 
 def index(request):
    template = loader.get_template("GPIO/dashboard.html")
@@ -55,6 +56,17 @@ def fetch_log(request):
             "content": linefields[2].strip()
          })
    return JsonResponse(logcontent, safe=False)
+
+def fetch_training_data(request):
+   training_data = BASE_DIR / "trainingdata" / "basedata.csv"
+   result = []
+   with training_data.open("r") as file:
+      file_data = csv.DictReader(file)
+      
+      for data_row in file_data:
+         result.append(data_row)
+   
+   return JsonResponse(result, safe=False)
 
 def predict_persons(request, voc_value):
    model = VOCRegressionModel()
