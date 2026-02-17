@@ -13,8 +13,9 @@
         @include t.interface-shadow();
 
         display: grid;
-        grid-template-columns: 1fr 3fr;
-        column-gap: .8rem;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2rem;
+
 
         .latest {
             display: flex;
@@ -70,9 +71,17 @@
         }
     }
 
-    &_measurements {
-        canvas {
-            background-color: white;
+    &_regression {
+        &-graph {
+            position: relative;
+            width: 100%;
+
+            canvas {
+                border-radius: t.$border-radius-base;
+                padding: 2rem;
+                background: t.$gradient-light-red;
+                @include t.interface-shadow();
+            }
         }
     }
 }

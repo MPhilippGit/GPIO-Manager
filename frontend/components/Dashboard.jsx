@@ -50,6 +50,29 @@ function Dashboard() {
     return (
         <div className="dash-container dash-board">
             <div className="dash-board_measurements">
+                <div className="dash-board_regression">
+                    <h4>Regression</h4>
+                    <div className="dash-board_regression-graph">
+                        <RegressionChart
+                            prediction={"predict/guests"}
+                        />
+                    </div>
+                    <div className="dash-board_regression-predictions">
+                        <h4>Predictions</h4>
+                        <Measurement
+                            prediction={"Vorhergesagter Tempearaturwert:"}
+                            refreshKey={refreshKey}
+                            value={latest.temperature}
+                            unit={"°C"}
+                        />
+                        <Measurement
+                            prediction={"R-Wert"}
+                            refreshKey={refreshKey}
+                            value={latest.humidity}
+                            unit={"rH[%]"}
+                        />
+                    </div>
+                </div>
                 <div className="latest">
                     <h4>Messwerte</h4>
                     <Measurement
@@ -78,31 +101,8 @@ function Dashboard() {
                             <Icon name="thermometer" color="white" size={32} />
                         }
                     />
-                    <div>
+                    <div className="latest_interface">
                         <Refresher onClick={refresh} />
-                    </div>
-                </div>
-                <div className="dash-board_regression">
-                    <h4>Regression</h4>
-                    <div className="dash-board_regression-regression">
-                        <RegressionChart
-                            prediction={"predict/guests"}
-                        />
-                    </div>
-                    <div className="dash-board_regression-predictions">
-                        <h4>Predictions</h4>
-                        <Measurement
-                            prediction={"Vorhergesagter Tempearaturwert:"}
-                            refreshKey={refreshKey}
-                            value={latest.temperature}
-                            unit={"°C"}
-                        />
-                        <Measurement
-                            prediction={"R-Wert"}
-                            refreshKey={refreshKey}
-                            value={latest.humidity}
-                            unit={"rH[%]"}
-                        />
                     </div>
                 </div>
             </div>
