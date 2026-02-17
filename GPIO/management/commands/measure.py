@@ -25,7 +25,7 @@ class Command(BaseCommand):
             data["is_plausible"] = self.is_plausible()
             data["timestamp"] = timezone.now()
             SensorValues.save_values(**data)
-            logger.info("New data: {0} C, {1} hPa, {2} rH[%], {3} ppm".format(
+            logger.info("New data: {0} C, {1} hPa, {2} rH[%], {3} [IAQ]".format(
                 data["temperature"],
                 data["pressure"],
                 data["humidity"],

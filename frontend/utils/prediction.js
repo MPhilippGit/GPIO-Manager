@@ -11,7 +11,6 @@ class PredictionHelper {
     }
 
     getXYValues(data) {
-        console.log(data, "this should be only voc values")
         return data.map(x => [x, this.predict(x)])
     }
 }

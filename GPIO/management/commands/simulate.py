@@ -14,7 +14,7 @@ class Command(BaseCommand):
             data = self.simulate_gpio()
             data["timestamp"] = timezone.now()
             SensorValues.save_values(**data)
-            logger.info("New data: {0} C, {1} hPa, {2} rH[%], {3} ppm".format(
+            logger.info("New data: {0} C, {1} hPa, {2} rH[%], {3} [IAQ]".format(
                 data["temperature"],
                 data["pressure"],
                 data["humidity"],

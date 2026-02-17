@@ -78,7 +78,7 @@ const datasets = {
         tension: 0.1,
     },
     [PATHS.VOC]: {
-        label: "VOC Konzentration (ppm)",
+        label: "VOC Konzentration (IAQ)",
         fill: true,
         borderColor: "rgb(181, 149, 32)",
         tension: 0.1,

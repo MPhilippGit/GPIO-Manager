@@ -29,10 +29,28 @@ class BME680Data:
                 self.pressure = round(self.sensor.data.pressure, 2)
                 self.humidity = round(self.sensor.data.humidity, 2)
                 if self.sensor.data.heat_stable:
-                    self.voc = round(self.sensor.data.gas_resistance, 2)
+                    self.voc = self.resistance_to_iaq()
                     return self
         # if voc value can't be established after
         raise IOError
+
+    def resistance_to_iaq(self):
+        """
+        Approximates IAQ (0–500) from BME680 gas resistance (Ohm).
+        Higher resistance = better air quality.
+        """
+        if self.sensor.data.gas_resistance <= 0:
+            return 500
+
+        GAS_MIN = 5000     # extrem schlechte Luft
+        GAS_MAX = 50000    # sehr gute Luft
+
+        gas = max(min(self.sensor.data.gas_resistance, GAS_MAX), GAS_MIN)
+
+        iaq = 500 - ((gas - GAS_MIN) / (GAS_MAX - GAS_MIN) * 500)
+
+        return round(iaq, 1)
+
 
     def to_dict(self):
         return {
