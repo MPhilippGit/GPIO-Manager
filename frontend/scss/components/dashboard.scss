@@ -6,7 +6,7 @@
     
     &_measurements {
         animation: boardInitializer .3s ease-in-out forwards;
-        min-height: 70%;
+        min-height: 90%;
         background: t.$gradient-shift;
         border-radius: t.$border-radius-base;
         padding: 2rem 1.5rem;
@@ -27,7 +27,7 @@
                 justify-content: center;
                 padding: 1rem 3rem;
                 border-radius: t.$border-radius-base;
-                background: t.$gradient-bg;
+                background-color: t.$bg-dark;
                 animation: fadeIn .3s ease-in;
 
                 gap: 12px;
@@ -44,14 +44,17 @@
                 display: inline-flex;
                 align-items: center;
                 border-radius: t.$border-radius-base;
-                background-color: t.$accent-blue;
+                background-color: t.$accent-red;
                 border: 0;
+                transition: background-color ease-in .3s;
                 padding: 0.4rem 1rem;
                 color: white;
                 outline: none;
 
                 &:hover {
                     cursor: pointer;
+                    box-shadow: 0 0 2px black;
+                    background-color: t.$accent-orange;
                 }
             }
         }

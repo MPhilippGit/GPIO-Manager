@@ -48,6 +48,7 @@ function Dashboard() {
         <div className="dash-container dash-board">
             <div className="dash-board_measurements">
                 <div className="latest">
+                    <h2>Messwerte</h2>
                     <Measurement 
                         refreshKey={refreshKey}
                         value={latest.pressure}
