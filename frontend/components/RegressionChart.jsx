@@ -40,12 +40,12 @@ function RegressionChart({ prediction }) {
     }
 
     const getScatteredData = () => {
-        return regressionModelData.data.map(entry => [entry.voc, entry.target]);
+        return regressionModelData.data.map(entry => [entry.source, entry.target]);
     }
 
     const getRegressionLine = () => {
         const handler = new PredictionHelper(regressionModelData.model.slope, regressionModelData.model.intercept)
-        return handler.getXYValues(regressionModelData.data.map(entry => entry.voc));
+        return handler.getXYValues(regressionModelData.data.map(entry => entry.source));
     }
 
     const options = {
