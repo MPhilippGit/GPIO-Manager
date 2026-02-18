@@ -51,25 +51,9 @@ function Dashboard() {
         <div className="dash-container dash-board">
             <div className="dash-board_measurements">
                 <div className="dash-board_regression">
-                    <h4>Regression</h4>
                     <div className="dash-board_regression-graph">
                         <RegressionChart
                             prediction={"predict/guests"}
-                        />
-                    </div>
-                    <div className="dash-board_regression-predictions">
-                        <h4>Predictions</h4>
-                        <Measurement
-                            prediction={"Vorhergesagter Tempearaturwert:"}
-                            refreshKey={refreshKey}
-                            value={latest.temperature}
-                            unit={"°C"}
-                        />
-                        <Measurement
-                            prediction={"R-Wert"}
-                            refreshKey={refreshKey}
-                            value={latest.humidity}
-                            unit={"rH[%]"}
                         />
                     </div>
                 </div>

@@ -12,8 +12,9 @@
         padding: 2rem 1.5rem;
         @include t.interface-shadow();
 
-        display: grid;
-        column-gap: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
 
 
         .latest {

@@ -97,8 +97,14 @@ function RegressionChart({ prediction }) {
     };
 
     return (
-        <Scatter data={data} options={options} />
-    )
+        <>
+            <div className="dash-board_regression-predictions">
+                <h4>Regressionsmodell</h4>
+                <Scatter data={data} options={options} />
+                
+            </div>
+        </>
+    );
 }
 
 export default RegressionChart;
