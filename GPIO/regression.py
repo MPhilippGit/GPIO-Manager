@@ -129,8 +129,6 @@ class TemperatureRegressionModel:
         prediction = self.model.predict([[person_amount]])[0]
 
 class TrainingDataExporter:
-
-class TrainingData:
     """Export plausible sensor readings to a CSV file for training.
 
     Attributes:
