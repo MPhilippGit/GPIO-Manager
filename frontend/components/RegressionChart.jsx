@@ -10,6 +10,7 @@ import {
 } from "chart.js";
 import { Scatter } from "react-chartjs-2";
 import { PredictionHelper } from "../utils/prediction";
+import { Prediction } from "./Prediction";
 
 ChartJS.register(
     LinearScale,
@@ -98,10 +99,12 @@ function RegressionChart({ prediction }) {
 
     return (
         <>
-            <div className="dash-board_regression-predictions">
-                <h4>Regressionsmodell</h4>
-                <Scatter data={data} options={options} />
-                
+            <div>
+                    <h4>Regressionsmodell</h4>
+                <div className="dash-board_regression-predictions">
+                    <Scatter data={data} options={options} />
+                    {regressionModelData.model && <Prediction slope={regressionModelData.model.slope} intercept={regressionModelData.model.intercept} />}
+                </div>
             </div>
         </>
     );

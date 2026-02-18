@@ -98,8 +98,14 @@
     }
 
     &_regression {
-        &-graph {
+        &-predictions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 3rem;
+
             canvas {
+                max-width: 100%;
+                height: auto !important;
                 border-radius: t.$border-radius-base;
                 padding: 2rem;
                 background: t.$gradient-light-red;
