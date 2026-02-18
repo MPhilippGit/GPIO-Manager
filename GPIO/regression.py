@@ -19,13 +19,27 @@ class VOCRegressionModel:
         self._train()
 
     def _train(self):
-        X = self.df[['voc_value']]
-        y = self.df['persons_estimated']
+        X = self.df[['persons_estimated']]
+        y = self.df['temperature']
 
         self.model.fit(X, y)
 
         y_pred = self.model.predict(X)
         self.r2_score = r2_score(y, y_pred)
+        return self
+
+    def _voc_to_person(self):
+        X = self.df[['voc_value']]
+        y = self.df['persons_estimated']
+
+        self.person_model = LinearRegression()
+        self.person_model.fit(X, y)
+        self.person_model.predict(X)
+
+        return {
+            "slope": self.person_model.coef_[0],
+            "intercept": self.person_model.intercept_
+        }
 
     def get_r2_scrore(self):
         return self.r2_score
@@ -43,8 +57,8 @@ class VOCRegressionModel:
             
             for data_row in file_data:
                 training_data.append({
-                    "voc": data_row["voc_value"],
-                    "target": data_row["persons_estimated"]
+                    "source": data_row["persons_estimated"],
+                    "target": data_row["temperature"]
                 })
         return training_data
 
@@ -76,7 +90,10 @@ class TemperatureRegressionModel:
     def get_intercept(self):
         return self.model.intercept_
 
-class TrainingData:
+    def predict_temperature(self, person_amount):
+        prediction = self.model.predict([[person_amount]])[0]
+
+class TrainingDataExporter:
     file = BASE_DIR / "trainingdata" / "trained.csv"
     override = False
 
@@ -84,7 +101,7 @@ class TrainingData:
         self.data = SensorValues.objects.filter(is_plausible=1).all()
 
     def ensure_file_exists(self):
-        if not TrainingData.file.exists():
+        if not TrainingDataExporter.file.exists():
             self.file.touch()
 
     def write_csv(self):

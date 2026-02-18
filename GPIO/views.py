@@ -76,8 +76,10 @@ def predict_persons(request):
          "intercept": model.get_intercept(),
          "r2_score": model.get_r2_scrore()
       },
+      "voc_model": model._voc_to_person(),
       "data": model.get_training_data()
    }
+   print(model._voc_to_person())
    return JsonResponse(result, safe=False)
 
 def predict_temperature(request, temp_value):

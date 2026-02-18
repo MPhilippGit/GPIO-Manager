@@ -23,6 +23,10 @@ ChartJS.register(
 function RegressionChart({ prediction }) {
     const [ regressionModelData, setRegressionModelData ] = useState([])
 
+    useEffect(() => {
+        fetchRegression(prediction);
+    }, [prediction]);
+
     const fetchRegression = async () => {
         try {
             const response = await fetch(prediction);
@@ -34,10 +38,6 @@ function RegressionChart({ prediction }) {
             setRegressionModelData([]);
         }
     }
-
-    useEffect(() => {
-        fetchRegression(prediction);
-    }, [prediction]);
 
     const getScatteredData = () => {
         return regressionModelData.data.map(entry => [entry.voc, entry.target]);
@@ -82,7 +82,6 @@ function RegressionChart({ prediction }) {
                 backgroundColor: "rgba(54, 162, 235, 0.8)",
                 pointRadius: 4,
             },
-
             // Dataset 2: Regression Line
             {
                 type: "line",
