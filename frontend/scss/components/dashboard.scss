@@ -17,12 +17,34 @@
         gap: 3rem;
 
 
+
         .latest {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
             border-radius: t.$border-radius-base;
             
+
+            h4 {
+                width: 100%;
+                margin: 0;
+                text-align: center;
+            }
+
+            &_measurements {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            &_interface {
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+            }
 
             &_box {
                 display: inline-flex;
@@ -32,7 +54,7 @@
                 background-color: t.$bg-dark;
                 animation: fadeIn .3s ease-in;
 
-                gap: 12px;
+                gap: 150px;
                 @include t.interface-shadow();
                 align-items: center;
 
@@ -47,8 +69,10 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                padding: 1rem 3rem;
                 border-radius: t.$border-radius-base;
                 background-color: t.$bg-dark;
+                @include t.interface-shadow();
             }
 
             .btn-refresh {
@@ -61,6 +85,8 @@
                 padding: 0.4rem 1rem;
                 color: white;
                 outline: none;
+                padding: 0,5rem;
+                
 
                 &:hover {
                     cursor: pointer;

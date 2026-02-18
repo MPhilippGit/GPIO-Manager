@@ -59,32 +59,34 @@ function Dashboard() {
                 </div>
                 <div className="latest">
                     <h4>Messwerte</h4>
-                    <Measurement
-                        refreshKey={refreshKey}
-                        value={latest.pressure}
-                        unit={"hPa"}
-                        icon={<Icon name="circle-gauge" size={32} />}
-                    />
-                    <Measurement
-                        refreshKey={refreshKey}
-                        value={latest.humidity}
-                        unit={"rH[%]"}
-                        icon={<Icon name="bubbles" size={32} />}
-                    />
-                    <Measurement
-                        refreshKey={refreshKey}
-                        value={latest.voc}
-                        unit={"Ohm"}
-                        icon={<Icon name="spray-can" size={32} />}
-                    />
-                    <Measurement
-                        refreshKey={refreshKey}
-                        value={latest.temperature}
-                        unit={"°C"}
-                        icon={
-                            <Icon name="thermometer" color="white" size={32} />
-                        }
-                    />
+                    <div className="latest_measurements">
+                        <Measurement
+                            refreshKey={refreshKey}
+                            value={latest.pressure}
+                            unit={"hPa"}
+                            icon={<Icon name="circle-gauge" size={32} />}
+                        />
+                        <Measurement
+                            refreshKey={refreshKey}
+                            value={latest.humidity}
+                            unit={"rH[%]"}
+                            icon={<Icon name="bubbles" size={32} />}
+                        />
+                        <Measurement
+                            refreshKey={refreshKey}
+                            value={latest.voc}
+                            unit={"Ohm"}
+                            icon={<Icon name="spray-can" size={32} />}
+                        />
+                        <Measurement
+                            refreshKey={refreshKey}
+                            value={latest.temperature}
+                            unit={"°C"}
+                            icon={
+                                <Icon name="thermometer" color="white" size={32} />
+                            }
+                        />
+                    </div>
                     <div className="latest_interface">
                         <Refresher onClick={refresh} />
                     </div>

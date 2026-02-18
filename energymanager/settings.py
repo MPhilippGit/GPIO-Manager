@@ -166,7 +166,7 @@ STATICFILES_DIRS = [
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": False,
+        "dev_mode": True,
         "manifest_path": BASE_DIR / "dist" / "manifest.json",
     }
 }
