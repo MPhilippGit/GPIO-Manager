@@ -61,13 +61,13 @@ function RegressionChart({ prediction }) {
                 type: "linear",
                 title: {
                     display: true,
-                    text: "X Axis",
+                    text: "Anzahl der Gäste",
                 },
             },
             y: {
                 title: {
                     display: true,
-                    text: "Y Axis",
+                    text: "Temperatur",
                 },
             },
         },
