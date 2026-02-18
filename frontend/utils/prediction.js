@@ -7,11 +7,11 @@ class PredictionHelper {
     }
 
     predict(x) {
-        return Math.round(this.slope*x + this.intercept);
+        return this.slope*x + this.intercept;
     }
 
     getXYValues(data) {
-        return data.map(x => [x, this.predict(x)])
+        return data.map(x => [parseFloat(x), this.predict(x)])
     }
 }
 

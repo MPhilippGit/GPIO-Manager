@@ -13,7 +13,6 @@
         @include t.interface-shadow();
 
         display: grid;
-        grid-template-columns: 1fr 1fr;
         column-gap: 2rem;
 
 
@@ -73,9 +72,6 @@
 
     &_regression {
         &-graph {
-            position: relative;
-            width: 100%;
-
             canvas {
                 border-radius: t.$border-radius-base;
                 padding: 2rem;

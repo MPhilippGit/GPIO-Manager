@@ -72,6 +72,8 @@ function RegressionChart({ prediction }) {
         },
     };
 
+    regressionModelData.data && console.log(getRegressionLine())
+
     const data = {
         datasets: [
             // Dataset 1: Raw Points
