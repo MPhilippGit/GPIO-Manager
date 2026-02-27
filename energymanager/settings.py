@@ -26,12 +26,7 @@ SECRET_KEY = 'django-insecure-6eke%jf8agotp6!7ac%c!v$ub=d9p8q5nlj^4i&22qp*9q^hg5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    '172.16.111.39',
-    '192.168.178.59',
-    '127.0.0.1',
-    'localhost'
-]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -166,7 +161,7 @@ STATICFILES_DIRS = [
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": True,
+        "dev_mode": False,
         "manifest_path": BASE_DIR / "dist" / "manifest.json",
     }
 }

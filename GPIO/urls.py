@@ -10,5 +10,4 @@ urlpatterns = [
     path("api/regression", views.fetch_training_data, name="regression"),
     path("logs", views.fetch_log, name="log"),
     path('predict/guests/', views.predict_persons),
-    path('predict/temperature/', views.predict_temperature),
 ]

@@ -12,11 +12,8 @@ import logging
 
 
 class SensorValues(models.Model):
-   """Model representing a single sensor measurement.
-
-   Fields mirror the physical sensor output and include a boolean
-   `is_plausible` which higher-level logic uses to filter unreliable
-   readings (e.g. when no presence was detected by the radar sensor).
+   """
+   This model represents a full set of measurements including a plausibility estimation.
    """
 
    voc =  models.DecimalField(max_digits=10, decimal_places=2, db_column="voc")

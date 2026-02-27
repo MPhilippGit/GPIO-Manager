@@ -9,7 +9,11 @@ class PredictionHelper {
     predict(x) {
         return this.slope*x + this.intercept;
     }
-
+    /**
+     * 
+     * @param data array of person count from the regression data
+     * @returns an array of corresponding xy-pairs to visualize the regression line  
+     */
     getXYValues(data) {
         return data.map(x => [parseFloat(x), this.predict(x)])
     }
