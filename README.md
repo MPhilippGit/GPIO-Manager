@@ -347,7 +347,7 @@ def fetch_log(request):
 
 ### 4. Regressionsanalyse
 
-**Schnittstelle für die Regression (`frontend/components/Prediction.jsx`):**
+**Schnittstelle für die Regression (`GPIO/regression.py`):**
 Die Ergebnisse im Frontend basieren auf einem Regressionsmodel welches mit Daten aus einer CSV-Datei angereichert wurde. Die Ergebnisse des Regressionsmodells werden über einen Api-Endpunkt ausgegeben (R-Wert, Steigung und Y-Achsenabschnitt). Über die Klasse TemperatureRegressionModel hat man Zugriff auf den Zusammenhang von VOC-Werten zur Temperatur. Zusätzlich dazu ist es möglich mithilfe des VOCRegressionModels einen Zusammenhang zwischen Anzahl an Personen und dem VOC-Wert im Raum herzustellen.
 
 ```python
