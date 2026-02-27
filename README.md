@@ -318,7 +318,6 @@ def fetch_latest(request):
 ```
 
 **Beispiel: Abruf historischer Daten mit Abstraktion (`fetch_temperatures`):**
-Um dem Frontend eine konsistente Datenstruktur zu liefern (unabhängig vom Datenbankfeld), wird das Feld `temperature` per Annotation auf `measurement` gemappt.
 ```python
 def fetch_temperatures(request):
    """Gibt die letzten 10 Temperaturmessungen zurück."""
@@ -330,7 +329,6 @@ def fetch_temperatures(request):
 ```
 
 **Beispiel: Log-Dateien auslesen (`fetch_log`):**
-Neben Datenbankinhalten werden auch System-Logs direkt eingelesen und strukturiert zurückgegeben.
 ```python
 def fetch_log(request):
    """Liest die app.log aus und gibt die Einträge als JSON zurück."""
@@ -350,7 +348,7 @@ def fetch_log(request):
 ### 4. Regressionsanalyse
 
 **Schnittstelle für die Regression (`frontend/components/Prediction.jsx`):**
-Die Ergebnisse im Frontend basieren auf einem Regressionsmodel welches mit Daten aus einer CSV-Datei angereichert wurde.  (R-Wert, Steigung und Y-Achsenabschnitt). Über die Klasse TemperatureRegressionModel hat man Zugriff auf den Zusammenhang von VOC-Werten zur Temperatur. Zusätzlich dazu ist es möglich mithilfe des VOCRegressionModels einen Zusammenhang zwischen Anzahl an Personen und dem VOC-Wert im Raum herzustellen.
+Die Ergebnisse im Frontend basieren auf einem Regressionsmodel welches mit Daten aus einer CSV-Datei angereichert wurde. Die Ergebnisse des Regressionsmodells werden über einen Api-Endpunkt ausgegeben (R-Wert, Steigung und Y-Achsenabschnitt). Über die Klasse TemperatureRegressionModel hat man Zugriff auf den Zusammenhang von VOC-Werten zur Temperatur. Zusätzlich dazu ist es möglich mithilfe des VOCRegressionModels einen Zusammenhang zwischen Anzahl an Personen und dem VOC-Wert im Raum herzustellen.
 
 ```python
 class VOCRegressionModel:
