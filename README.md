@@ -6,6 +6,9 @@
 - Philipp Müller
 - Cedric Hintzen
 
+### Link zum Git Repository
+- https://github.com/MPhilippGit/GPIO-Manager
+
 ### Anforderungsprofil:
 - Erfassung von Sensordaten:
     - BME680
@@ -38,7 +41,7 @@
 
 ### Aufbau
 
-![Tux, the Linux mascot](/screenshots/sensorkabel.jpg)
+![Tux, the Linux mascot](./screenshots/sensorkabel.jpg)
 
 ### 1. Erfassung von Sensordaten (BME680 & RCWL-0516)
 Die Erfassung der Umweltdaten erfolgt über den BME680-Sensor, dessen Rohwerte (Gaswiderstand) in einen IAQ-Score umgerechnet werden. Parallel wird über den RCWL-0516 Radarsensor die Plausibilität der Messung (Anwesenheit/Bewegung) geprüft. Zur Systemerfassung werden beide Sensoren als Objekte instanziiert.
@@ -275,23 +278,7 @@ class Command(BaseCommand):
             logger.error(f"{error} database operation failed")
 ```
 
-### 3. Weboberfläche (React Dashboard)
-Das Frontend basiert auf React und ruft die aktuellen Messwerte über eine API ab, um sie visualisiert darzustellen.
-
-**Datenabruf im Dashboard (`frontend/components/Dashboard.jsx`):**
-```javascript
-const fetchLatest = async (endpoint) => {
-    try {
-        const response = await fetch(endpoint);
-        const result = await response.json();
-        setLatest(result);
-    } catch (error) {
-        console.error(error.message);
-        setLatest([]);
-    }
-};
-```
-### 4. Datenbank-Schnittstelle
+### 3. Datenbank-Schnittstelle
 
 Die Models aus der Django-Applikation können genutzt werden um einfach Endpunkte für den Datenabruf im Frontend abzubilden.
 
@@ -311,8 +298,172 @@ urlpatterns = [
 ]
 ```
 
-### 5. Regressionsanalyse
-Auf Basis der gesammelten Daten wird eine Regressionsanalyse durchgeführt, um Vorhersagen (z.B. Temperaturentwicklung basierend auf Gästeanzahl) zu treffen.
+**Datenbereitstellung über Views (`GPIO/views.py`):**
+Die Views dienen als API-Endpunkte, welche die Daten aus der Datenbank (oder aus Log-Dateien) abrufen und für das Frontend als JSON aufbereiten. Dabei werden Django-Features wie `annotate` genutzt, um Datenstrukturen zu vereinheitlichen.
+
+**Beispiel: Abruf der aktuellsten Messwerte (`fetch_latest`):**
+```python
+def fetch_latest(request):
+   """Gibt die aktuellste Sensormessung als JSON zurück."""
+   data = SensorValues.objects.latest("timestamp")
+   result = {
+      "temperature": data.temperature,
+      "humidity": data.humidity,
+      "voc": data.voc,
+      "pressure": data.pressure,
+      "is_plausible": data.is_plausible,
+      "timestamp": data.timestamp
+   }
+   return JsonResponse(result, safe=False)
+```
+
+**Beispiel: Abruf historischer Daten mit Abstraktion (`fetch_temperatures`):**
+Um dem Frontend eine konsistente Datenstruktur zu liefern (unabhängig vom Datenbankfeld), wird das Feld `temperature` per Annotation auf `measurement` gemappt.
+```python
+def fetch_temperatures(request):
+   """Gibt die letzten 10 Temperaturmessungen zurück."""
+   data = list(SensorValues.objects.annotate(
+      measurement=F("temperature")
+   ).values("measurement", "timestamp", "is_plausible"))
+   filter_data = data[-10:]
+   return JsonResponse(filter_data, safe=False)
+```
+
+**Beispiel: Log-Dateien auslesen (`fetch_log`):**
+Neben Datenbankinhalten werden auch System-Logs direkt eingelesen und strukturiert zurückgegeben.
+```python
+def fetch_log(request):
+   """Liest die app.log aus und gibt die Einträge als JSON zurück."""
+   logfile = BASE_DIR / "app.log"
+   logcontent = []
+   with logfile.open("r") as f:
+      for line in f.readlines()[::-3]:
+         linefields = line.split("|")
+         logcontent.append({
+            "level": linefields[0].strip(),
+            "timestamp": linefields[1].strip(),
+            "content": linefields[2].strip()
+         })
+   return JsonResponse(logcontent, safe=False)
+```
+
+### 4. Regressionsanalyse
+
+**Schnittstelle für die Regression (`frontend/components/Prediction.jsx`):**
+Die Ergebnisse im Frontend basieren auf einem Regressionsmodel welches mit Daten aus einer CSV-Datei angereichert wurde.  (R-Wert, Steigung und Y-Achsenabschnitt). Über die Klasse TemperatureRegressionModel hat man Zugriff auf den Zusammenhang von VOC-Werten zur Temperatur. Zusätzlich dazu ist es möglich mithilfe des VOCRegressionModels einen Zusammenhang zwischen Anzahl an Personen und dem VOC-Wert im Raum herzustellen.
+
+```python
+class VOCRegressionModel:
+    """Linear model predicting estimated persons from VOC values.
+
+    Attributes:
+        FILE_REFERENCE: Path to the CSV file used to load training data.
+        df: pandas DataFrame loaded from the CSV on initialization.
+        model: Fitted `LinearRegression` instance.
+        r2_score: Coefficient of determination for the fit.
+    """
+
+    FILE_REFERENCE = BASE_DIR / "trainingdata" / "basedata.csv"
+
+    def __init__(self):
+        # Load training data and train the model immediately.
+        self.df = pd.read_csv(self.FILE_REFERENCE)
+        self.model = LinearRegression()
+        self.r2_score = None
+        self._train()
+
+    def _train(self):
+        X = self.df[['persons_estimated']]
+        y = self.df['temperature']
+
+        # Fit the linear model on the whole dataset.
+        self.model.fit(X, y)
+
+        # Compute predictions on the training set and store R^2 score.
+        y_pred = self.model.predict(X)
+        self.r2_score = r2_score(y, y_pred)
+        return self
+
+    def _voc_to_person(self):
+        X = self.df[['voc_value']]
+        y = self.df['persons_estimated']
+
+        self.person_model = LinearRegression()
+        self.person_model.fit(X, y)
+        self.person_model.predict(X)
+
+        return {
+            "slope": self.person_model.coef_[0],
+            "intercept": self.person_model.intercept_
+        }
+
+    def get_r2_scrore(self):
+        # Returns the stored R^2 score (method name kept for compatibility).
+        return self.r2_score
+
+    def get_slope(self):
+        # Return the learned coefficient (slope) for the single-feature model.
+        return self.model.coef_[0]
+
+    def get_intercept(self):
+        # Return the learned intercept of the linear model.
+        return self.model.intercept_
+
+    def get_training_data(self):
+        """Read the CSV file and return a list of simple dicts for UI display.
+
+        Each item contains the original VOC value and the target persons value.
+        """
+        training_data = []
+        with self.FILE_REFERENCE.open("r") as file:
+            file_data = csv.DictReader(file)
+
+            for data_row in file_data:
+                training_data.append({
+                    "source": data_row["persons_estimated"],
+                    "target": data_row["temperature"]
+                })
+        return training_data
+
+class TemperatureRegressionModel:
+    """Linear model predicting temperature from VOC values.
+
+    This class mirrors `VOCRegressionModel` but uses `temperature` as the
+    target column. The API is intentionally similar to keep usage consistent.
+    """
+
+    def __init__(self):
+        # Read the same training CSV used by VOCRegressionModel.
+        self.df = pd.read_csv(BASE_DIR / "trainingdata" / "basedata.csv")
+        self.model = LinearRegression()
+        self.r2_score = None
+        self._train()
+
+    def _train(self):
+        X = self.df[['voc_value']]
+        y = self.df['temperature']
+
+        self.model.fit(X, y)
+
+        y_pred = self.model.predict(X)
+        self.r2_score = r2_score(y, y_pred)
+
+    def get_r2_scrore(self):
+        # Return the stored R^2 score for the temperature model.
+        return self.r2_score
+
+    def get_slope(self):
+        return self.model.coef_[0]
+
+    def get_intercept(self):
+        return self.model.intercept_
+
+    def predict_temperature(self, person_amount):
+        prediction = self.model.predict([[person_amount]])[0]
+
+```
+
+Die Ergebnisse dieser Analyse werden mithilfe einer View bereit gestellt und im Frontend graphisch dargestellt. Des weiteren wurde ein System implementiert um basierend auf der Gästeanzahl die geschätzte Temperatur zu ermitteln.
 
 **Vorhersage-Logik (`frontend/utils/prediction.js`):**
 ```javascript
@@ -347,4 +498,49 @@ const yValue = useMemo(() => {
 }, [xValue, slope, intercept]);
 ```
 
-## Anleitungen
+### 5. Weboberfläche (React Dashboard)
+Das Frontend basiert auf React und ruft die aktuellen Messwerte über eine API ab, um sie visualisiert darzustellen.
+
+**Datenabruf im Dashboard (`frontend/components/Dashboard.jsx`):**
+```javascript
+const fetchLatest = async (endpoint) => {
+    try {
+        const response = await fetch(endpoint);
+        const result = await response.json();
+        setLatest(result);
+    } catch (error) {
+        console.error(error.message);
+        setLatest([]);
+    }
+};
+```
+
+![Dashboard](./screenshots/webinterface.png)
+
+![Measurement](./screenshots/webinterface2.png)
+
+## Build- & Deployment-Prozess
+Um Python Backends mit Apache auszugeben benötigt es weitere Module. 
+
+### 1) Vorbereitung & Sync
+- Damit das Deployment-Skript funktioniert muss gewährleistet sein, dass ein entsprechender Ordner mit den richtigen Rechten existiert 
+```bash
+sudo mkdir /var/www/GPIO
+sudo chown -R "$USER:$USER" /var/www/GPIO
+```
+
+### 2) Deployment Skript ausführen
+- Erst muss das Skript ausführbar gemacht werden
+```bash
+sudo chmod +x ./deploy.sh
+```
+- Ausführen startet den sync Prozess 
+```bash
+sudo chmod +x ./deploy.sh
+```
+
+### 3) Updates 
+- neue Änderung aus dem Repo pullen mit git pull
+- deploy.sh ausführen
+```
+---
