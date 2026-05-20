@@ -75,3 +75,7 @@ class SensorCSVExporter:
          temperature: sensor_data.temperature,
          voc_value: sensor_data.voc
       }
+
+class Recordings:
+   path= models.CharField()
+   timestamp = models.DateTimeField(db_column="timestamp")
