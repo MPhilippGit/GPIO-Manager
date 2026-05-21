@@ -49,5 +49,9 @@ python3 manage.py collectstatic --noinput
 # ===== Rechte für User =====
 echo "🔐 Setze Rechte..."
 sudo chown -R "$USER:$GROUP" "$APP_DIR"
+# www-data needs read + traverse access on static output dirs
+sudo chmod -R g+rX "$APP_DIR/dist" "$APP_DIR/staticroot"
+# parent dirs must be traversable so nginx can reach APP_DIR
+sudo chmod o+x "$BASE_DIR" "$APP_DIR"
 
 echo "✅ Deployment fertig!"

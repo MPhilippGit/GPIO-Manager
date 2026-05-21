@@ -5,7 +5,7 @@ import path from "path";
 export default defineConfig({
    base: "/dist/",
    plugins: [react()],
-   assetsInclude: ['**/*.svg'],
+   assetsInclude: ['**/*.svg', '**/*.mp4', '**/*.webm', '**/*.ogg'],
    root: ".",
    build: {
       manifest: "manifest.json",
