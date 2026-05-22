@@ -162,7 +162,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DJANGO_VITE = {
     "default": {
-        "dev_mode": True,
+        "dev_mode": False,
         "manifest_path": BASE_DIR / "dist" / "manifest.json",
     }
 }
