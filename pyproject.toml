@@ -34,3 +34,8 @@ dependencies = [
 dev = [
     "ruff>=0.15.14",
 ]
+[project.optional-dependencies]
+raspberry = [
+    "gpiozero>=2.0.1",
+    "picamzero",
+]
