@@ -19,7 +19,7 @@ from django.template import loader
 
 from energymanager.settings import BASE_DIR
 
-from .models import SensorValues
+from .models import Recordings, SensorValues
 from .regression import TemperatureRegressionModel, VOCRegressionModel
 
 
@@ -164,3 +164,8 @@ def predict_temperature(request, temp_value):
     model = TemperatureRegressionModel()
     result = model.predict(temp_value)
     return JsonResponse(result, safe=False)
+
+
+def fetch_videos(request):
+    recordings = list(Recordings.objects.all().values())
+    return JsonResponse(recordings, safe=False)
