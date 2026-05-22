@@ -13,10 +13,9 @@ Supported sensors:
 Unknown sensor names will produce a short usage hint.
 """
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from GPIO.sensors.bme680 import BME680Data
 from GPIO.sensors.rcwl import RCWL
-import logging
 
 
 class Command(BaseCommand):

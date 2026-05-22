@@ -6,12 +6,8 @@ training the regression models. The command is intentionally thin and
 delegates file creation and row formatting to the `TrainingData` class.
 """
 
-from django.core.management.base import BaseCommand, CommandError
-from GPIO.models import SensorValues
+from django.core.management.base import BaseCommand
 from GPIO.regression import TrainingData
-from django.utils import timezone
-import random
-import logging
 
 
 class Command(BaseCommand):

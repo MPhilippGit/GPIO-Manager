@@ -11,7 +11,7 @@ Public methods:
 - `simulate_gpio()`: produce a realistic-looking sample for development.
 """
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from GPIO.models import SensorValues
 from GPIO.sensors.bme680 import BME680Data
 from GPIO.sensors.rcwl import RCWL

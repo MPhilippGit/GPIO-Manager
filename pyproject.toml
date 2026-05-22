@@ -10,7 +10,6 @@ dependencies = [
     "colorzero==2.0",
     "django==4.2.25",
     "django-vite==3.1.0",
-    "gpiozero==2.0.1",
     "gunicorn>=26.0.0",
     "importlib-metadata==4.13.0",
     "importlib-resources==5.13.0",
@@ -18,7 +17,6 @@ dependencies = [
     "mysqlclient>=2.2.8",
     "numpy==2.4.2",
     "pandas==3.0.0",
-    "picamzero",
     "pip==25.3",
     "python-dateutil==2.9.0.post0",
     "scikit-learn==1.8.0",
@@ -30,4 +28,9 @@ dependencies = [
     "threadpoolctl==3.6.0",
     "typing-extensions==4.15.0",
     "zipp==3.23.0",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.14",
 ]

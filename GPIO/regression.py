@@ -11,12 +11,14 @@ Notes:
   to avoid breaking external callers.
 """
 
-import pandas as pd
 import csv
+
+import pandas as pd
 from sklearn.linear_model import LinearRegression
-from energymanager.settings import BASE_DIR
 from sklearn.metrics import r2_score
-from GPIO.models import SensorValues, SensorCSVExporter
+
+from energymanager.settings import BASE_DIR
+from GPIO.models import SensorCSVExporter, SensorValues
 
 
 class VOCRegressionModel:
@@ -39,8 +41,8 @@ class VOCRegressionModel:
         self._train()
 
     def _train(self):
-        X = self.df[['persons_estimated']]
-        y = self.df['temperature']
+        X = self.df[["persons_estimated"]]
+        y = self.df["temperature"]
 
         # Fit the linear model on the whole dataset.
         self.model.fit(X, y)
@@ -51,8 +53,8 @@ class VOCRegressionModel:
         return self
 
     def _voc_to_person(self):
-        X = self.df[['voc_value']]
-        y = self.df['persons_estimated']
+        X = self.df[["voc_value"]]
+        y = self.df["persons_estimated"]
 
         self.person_model = LinearRegression()
         self.person_model.fit(X, y)
@@ -60,7 +62,7 @@ class VOCRegressionModel:
 
         return {
             "slope": self.person_model.coef_[0],
-            "intercept": self.person_model.intercept_
+            "intercept": self.person_model.intercept_,
         }
 
     def get_r2_scrore(self):
@@ -85,10 +87,12 @@ class VOCRegressionModel:
             file_data = csv.DictReader(file)
 
             for data_row in file_data:
-                training_data.append({
-                    "source": data_row["persons_estimated"],
-                    "target": data_row["temperature"]
-                })
+                training_data.append(
+                    {
+                        "source": data_row["persons_estimated"],
+                        "target": data_row["temperature"],
+                    }
+                )
         return training_data
 
 
@@ -107,8 +111,8 @@ class TemperatureRegressionModel:
         self._train()
 
     def _train(self):
-        X = self.df[['voc_value']]
-        y = self.df['temperature']
+        X = self.df[["voc_value"]]
+        y = self.df["temperature"]
 
         self.model.fit(X, y)
 
@@ -126,7 +130,8 @@ class TemperatureRegressionModel:
         return self.model.intercept_
 
     def predict_temperature(self, person_amount):
-        prediction = self.model.predict([[person_amount]])[0]
+        self.model.predict([[person_amount]])[0]
+
 
 class TrainingDataExporter:
     """Export plausible sensor readings to a CSV file for training.
@@ -156,5 +161,3 @@ class TrainingDataExporter:
 
             for entry in self.data:
                 writer.writerow(SensorCSVExporter.row(entry))
-
-

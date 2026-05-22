@@ -9,7 +9,7 @@ database. The command mirrors the real `measure` command's persistence
 path so the frontend and other components can be exercised.
 """
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from GPIO.models import SensorValues
 from django.utils import timezone
 import random

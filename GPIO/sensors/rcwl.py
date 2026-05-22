@@ -22,7 +22,7 @@ class RCWL:
     def __init__(self):
         try:
             self.sensor = MotionSensor(5)
-        except Exception as e:
+        except Exception:
             logger = logging.getLogger(__name__)
             logger.error("Radar sensor initialization failed")
 

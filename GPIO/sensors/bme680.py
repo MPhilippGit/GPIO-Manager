@@ -10,7 +10,6 @@ application:
   IAQ-like 0–500 score used by the project UI.
 """
 
-import logging
 import time
 import bme680
 

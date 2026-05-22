@@ -1,4 +1,5 @@
-from django.urls import path, include
+from django.urls import path
+
 from . import views
 
 urlpatterns = [
@@ -9,5 +10,6 @@ urlpatterns = [
     path("api/all", views.fetch_latest, name="latest"),
     path("api/regression", views.fetch_training_data, name="regression"),
     path("logs", views.fetch_log, name="log"),
-    path('predict/guests/', views.predict_persons),
+    path("predict/guests/", views.predict_persons),
+    path("videos", views.predict_persons),
 ]

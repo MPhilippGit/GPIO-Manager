@@ -6,7 +6,7 @@ deleted rows. It intentionally delegates deletion logic to
 invocation + logging.
 """
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from GPIO.models import SensorValues
 import logging
 

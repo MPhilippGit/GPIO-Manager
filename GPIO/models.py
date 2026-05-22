@@ -6,8 +6,6 @@ exporting training CSVs. The module contains a few convenience methods
 that keep calling code (management commands, views) compact.
 """
 
-from enum import unique
-from operator import truediv
 
 from django.db import models
 from django.utils import timezone
