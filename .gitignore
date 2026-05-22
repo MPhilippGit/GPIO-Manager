@@ -16,6 +16,7 @@ migrations/
 logs/
 node_modules
 static/
+media/
 app.log
 cron.log
 staticroot
