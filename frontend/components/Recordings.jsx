@@ -28,7 +28,7 @@ function Recordings() {
         <div className="dash-container_row">
           <div>{timestamp}</div>
           <VideoPlayer
-            src={"dist/frontend/assets/videos/" + filename}
+            src={"/media/videos/" + filename}
             title={filename}
           />
         </div>
