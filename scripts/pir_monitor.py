@@ -3,7 +3,7 @@ import subprocess
 import sys
 from signal import pause
 
-from gpiozero import MotionSensor
+from gpiozero import MotionSensor # type: ignore
 
 
 def main():

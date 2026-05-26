@@ -5,7 +5,7 @@ import sys
 from datetime import datetime
 from signal import pause
 
-from gpiozero import MotionSensor
+from gpiozero import MotionSensor # type: ignore
 
 
 def monitor():

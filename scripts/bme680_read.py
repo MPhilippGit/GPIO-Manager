@@ -4,7 +4,7 @@ import json
 import sys
 import time
 
-import bme680
+import bme680 # type: ignore
 
 
 def configure(sensor):
