@@ -1,6 +1,11 @@
+from pathlib import Path
+
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from GPIO.sensors.pir import MotionDetect
+import subprocess
+
+SCRIPTS = Path(settings.BASE_DIR) / "scripts"
 
 
 class Command(BaseCommand):
@@ -16,4 +21,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         command = options["cmd"]
         self.stdout.write(f"Listening for motion. On detection: {' '.join(command)}")
-        MotionDetect(command=command).run()
+        subprocess.run(["python3", str(SCRIPTS / "pir_monitor.py"), *command])
