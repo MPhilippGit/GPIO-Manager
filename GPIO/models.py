@@ -6,7 +6,6 @@ exporting training CSVs. The module contains a few convenience methods
 that keep calling code (management commands, views) compact.
 """
 
-
 from django.db import models
 from django.utils import timezone
 

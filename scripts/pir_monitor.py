@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 import subprocess
 import sys
+import time
 from signal import pause
 
-from gpiozero import MotionSensor # type: ignore
+from gpiozero import MotionSensor  # type: ignore
 
 
 def main():
@@ -19,10 +20,10 @@ def main():
 
     pir.when_motion = on_motion
 
-    try:
-        pause()
-    except KeyboardInterrupt:
-        pass
+    while True:
+        pir.wait_for_active()
+        print("Active")
+        time.sleep(20)
 
 
 if __name__ == "__main__":
