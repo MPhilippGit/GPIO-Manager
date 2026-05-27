@@ -16,7 +16,8 @@
     }
 
     &__video {
-        width: 100%;
+        width: 50%;
+        aspect-ratio: 16/9;
         border-radius: t.$border-radius-base;
         background-color: t.$bg-dark;
         outline: none;
