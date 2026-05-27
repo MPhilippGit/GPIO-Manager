@@ -25,10 +25,7 @@ class Command(BaseCommand):
         output_file = output_dir / filename
 
         cmd = [
-            "rpicam-vid",
-            "-t",
-            "10000",  # milliseconds = 10 seconds
-            "-o",
+            str(settings.BASE_DIR / "scripts" / "save_mp4.py"),
             str(output_file),
         ]
 

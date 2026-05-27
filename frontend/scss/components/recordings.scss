@@ -1,0 +1,52 @@
+@use "../theme/includes" as t;
+
+.recordings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__item {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(280px, 420px);
+    gap: 1rem;
+    align-items: start;
+    background: t.$gradient-shift;
+    border-radius: t.$border-radius-base;
+    padding: 1.25rem;
+    @include t.interface-shadow();
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__title {
+    margin: 0;
+    color: t.$text-primary;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  &__timestamp {
+    margin: 0;
+    color: t.$text-secondary;
+    font-size: 0.95rem;
+  }
+
+  &__empty {
+    padding: 2rem;
+    border-radius: t.$border-radius-base;
+    background: t.$bg-dark;
+    color: t.$text-secondary;
+    text-align: center;
+    @include t.interface-shadow();
+  }
+}
+
+@media (max-width: 720px) {
+  .recordings-list__item {
+    grid-template-columns: 1fr;
+  }
+}
