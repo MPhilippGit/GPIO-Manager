@@ -13,12 +13,15 @@ def main():
         sys.exit(1)
 
     command = sys.argv[1:]
-    pir = MotionSensor(4)
+    pir = MotionSensor(24)
 
+    # runs the django command to create a file + reference
     def on_motion():
         subprocess.Popen(command)
 
     pir.when_motion = on_motion
+
+    print("Looping")
 
     while True:
         pir.wait_for_active()
