@@ -22,15 +22,7 @@ React Recordings-Komponente
 
 ### Hardware-Aufbau / Verkabelung
 
-![Sensorkabel](screenshots/sensorkabel.jpg)
-
-### Web-Interface – Dashboard
-
-![Webinterface Dashboard](screenshots/webinterface.png)
-
-### Web-Interface – Messwerte
-
-![Webinterface Messwerte](screenshots/webinterface2.png)
+![Webinterface Dashboard](screenshots/webinterface4.jpe)
 
 ### Web-Interface – Aufnahmen (aktuell)
 
