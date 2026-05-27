@@ -172,6 +172,8 @@ path("videos", views.fetch_videos),
 
 Die React-Komponente `Recordings.jsx` ruft beim Laden den `/videos`-Endpunkt ab und rendert für jeden Eintrag eine `VideoPlayer`-Komponente mit HTML5-Videosteuerung. Die Videodateien werden über den Django-Media-Server unter `/media/videos/{filename}` bereitgestellt. Die Navigation erfolgt über die Sidebar-Schaltfläche „Security Recordings".
 
+![Measurement](./screenshots/webinterface3.png)
+
 ---
 
 ## `scripts/`-Verzeichnis – Übersicht
